@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* navbar */
+
+.navbar {
+    background-color: #181818;
+    user-select: none;
+    height: 20vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+ul {
+    width: 70vw;
+    display: flex;
+    list-style-type: none;
+    justify-content: space-around;
+    align-items: center;
+}
+
+li a {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+
+.big {
+    font-size: 4rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+}
+
+li a:not(.big):hover {
+    color: red;
+}
+/* navbar */
+
+
+
