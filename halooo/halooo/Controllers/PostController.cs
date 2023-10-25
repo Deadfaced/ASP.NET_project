@@ -4,11 +4,11 @@ using System.Diagnostics;
 
 namespace halooo.Controllers
 {
-    public class HomeController : Controller
+    public class PostController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<PostController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public PostController(ILogger<PostController> logger)
         {
             _logger = logger;
         }
@@ -17,7 +17,7 @@ namespace halooo.Controllers
         {
             return View();
         }
-
+        
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
