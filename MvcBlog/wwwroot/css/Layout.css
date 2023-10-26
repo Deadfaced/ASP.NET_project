@@ -6,7 +6,7 @@
 
 /* navbar */
 
-.navbar {
+.content {
     background-color: #181818;
     user-select: none;
     height: 20vh;
@@ -16,15 +16,15 @@
     align-items: center;
 }
 
-ul {
+.navbar {
     width: 70vw;
     display: flex;
     list-style-type: none;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
 }
 
-li a {
+a {
     font-size: 1.4rem;
     font-weight: bold;
     color: white;
@@ -33,8 +33,6 @@ li a {
 
 .big {
     font-size: 4rem;
-    padding-left: 4rem;
-    padding-right: 4rem;
 }
 
 li a:not(.big):hover {

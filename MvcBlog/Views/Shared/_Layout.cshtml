@@ -8,24 +8,12 @@
 </head>
 <body>
 <header>
-    <div class="navbar">
-        <ul>
-            <li>
-                <a href="">Home</a>
-            </li>
-            <li>
-                <a href="">News</a>
-            </li>
-            <li>
-                <a asp-controller="Home" asp-action="Index" class="big">JapanWanderer</a>
-            </li>
-            <li>
-                <a href="">Contact</a>
-            </li>
-            <li>
-                <a href="">About</a>
-            </li>
-        </ul>
+    <div class="content">
+        <div class="navbar">
+            <a asp-controller="Home" asp-action="About">About</a>
+            <a asp-controller="Home" asp-action="Index" class="big">JapanWanderer</a>
+            <a asp-controller="Home" asp-action="Login">Login</a>
+        </div>
     </div>
 </header>
 

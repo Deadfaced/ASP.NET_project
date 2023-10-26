@@ -8,24 +8,19 @@
     "net7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Daniel\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\bttei\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Daniel\\Desktop\\ASP.NET_project\\MvcBlog\\MvcBlog.csproj",
+      "projectUniqueName": "C:\\Users\\bttei\\Documents\\ATEC\\Atec-modulos\\ASP.NET\\MvcBlog\\MvcBlog.csproj",
       "projectName": "MvcBlog",
-      "projectPath": "C:\\Users\\Daniel\\Desktop\\ASP.NET_project\\MvcBlog\\MvcBlog.csproj",
-      "packagesPath": "C:\\Users\\Daniel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Daniel\\Desktop\\ASP.NET_project\\MvcBlog\\obj\\",
+      "projectPath": "C:\\Users\\bttei\\Documents\\ATEC\\Atec-modulos\\ASP.NET\\MvcBlog\\MvcBlog.csproj",
+      "packagesPath": "C:\\Users\\bttei\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\bttei\\Documents\\ATEC\\Atec-modulos\\ASP.NET\\MvcBlog\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Daniel\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\bttei\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -69,7 +64,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
       }
     }
   }
