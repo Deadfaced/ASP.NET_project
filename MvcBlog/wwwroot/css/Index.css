@@ -22,7 +22,11 @@ main .homeImage {
     background-image: url(../images/homeImage.jpg);
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
+    aspect-ratio: 1/1;
+}
+
+main .exploreCities{
+    margin: 2rem 0;
 }
 
 main .exploreCities h1{
@@ -53,7 +57,7 @@ main .exploreCitiesImgCard {
 
 main .exploreCities img {
     width: 10vw;
-    height: 20vh;
     object-fit: cover;
     border-radius: 50%;
+    aspect-ratio: 1/1;
 }
