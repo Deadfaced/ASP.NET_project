@@ -6,6 +6,11 @@
 
 /* navbar */
 
+body{
+    background-color: #181818;
+    color: white;
+}
+
 .content {
     background-color: #181818;
     user-select: none;
@@ -17,11 +22,13 @@
 }
 
 .navbar {
+    height: 100%;
     width: 70vw;
     display: flex;
     list-style-type: none;
     justify-content: space-between;
     align-items: center;
+    border-bottom: solid 1px #f5c1cd;
 }
 
 a {
