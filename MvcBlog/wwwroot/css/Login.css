@@ -1,0 +1,44 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80dvh;
+    background-color: #181818;
+    color: white;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 50dvw;
+    height: 50%;
+    background-color: #292929;
+    border-radius: 8px;
+    padding: 2rem;
+}
+
+.alignment{
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+}
+.alignment input{
+    width: 70%;
+}
+
+
+
+form input{
+    display: inline;
+    width: 40%;
+}
+form label{
+    display: inline;
+}
