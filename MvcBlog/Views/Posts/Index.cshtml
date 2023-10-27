@@ -8,14 +8,16 @@
 
 <div class="allPage">
 
-    <a asp-controller="Posts" asp-action="NewPost">New Post</a>
+    <a asp-controller="Posts" asp-action="NewPost" class="newPostTitle">New Post</a>
 
-    <div>
+    <div class="postList">
         @foreach (var p in Model.PostList)
         {
             <div class="post">
-                <h2><a asp-controller="Posts" asp-action="ViewPost" asp-route-id="@p.Id">@p.Title</a></h2>
-                <h5>@p.UpdatedAt</h5>
+                <div class="postHeader">
+                    <h2><a asp-controller="Posts" asp-action="ViewPost" asp-route-id="@p.Id">@p.Title</a></h2>
+                    <h5>@p.UpdatedAt</h5>
+                </div>
                 <p>@p.Content</p>
             </div>
         }
