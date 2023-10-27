@@ -1,10 +1,6 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\Daniel\\Desktop\\ASP.NET_project\\MvcBlog\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\MvcBlog.bundle.scp.css",
-      "PackagePath": "staticwebassets\\MvcBlog.bundle.scp.css"
-    },
-    {
       "Id": "C:\\Users\\Daniel\\Desktop\\ASP.NET_project\\MvcBlog\\wwwroot\\css\\Home\\Index.css",
       "PackagePath": "staticwebassets\\css\\Home\\Index.css"
     },
