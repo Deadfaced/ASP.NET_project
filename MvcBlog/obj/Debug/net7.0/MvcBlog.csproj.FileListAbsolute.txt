@@ -52,3 +52,5 @@ C:\Users\Daniel\Desktop\ASP.NET_project\MvcBlog\obj\Debug\net7.0\refint\MvcBlog.
 C:\Users\Daniel\Desktop\ASP.NET_project\MvcBlog\obj\Debug\net7.0\MvcBlog.pdb
 C:\Users\Daniel\Desktop\ASP.NET_project\MvcBlog\obj\Debug\net7.0\MvcBlog.genruntimeconfig.cache
 C:\Users\Daniel\Desktop\ASP.NET_project\MvcBlog\obj\Debug\net7.0\ref\MvcBlog.dll
+C:\Users\Daniel\Desktop\ASP.NET_project\MvcBlog\obj\Debug\net7.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+C:\Users\Daniel\Desktop\ASP.NET_project\MvcBlog\obj\Debug\net7.0\scopedcss\projectbundle\MvcBlog.bundle.scp.css
