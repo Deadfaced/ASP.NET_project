@@ -1,41 +1,31 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" href="~/css/Layout.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/Layout.css" asp-append-version="true" />
 </head>
+
 <body>
-<header>
-    <div class="navbar">
-        <ul>
-            <li>
-                <a href="">Home</a>
-            </li>
-            <li>
-                <a href="">News</a>
-            </li>
-            <li>
+    <header>
+        <div class="content">
+            <div class="navbar">
+                <a asp-controller="Home" asp-action="About">About</a>
                 <a asp-controller="Home" asp-action="Index" class="big">JapanWanderer</a>
-            </li>
-            <li>
-                <a href="">Contact</a>
-            </li>
-            <li>
-                <a asp-controller="Posts" asp-action="Index">Posts</a>
-            </li>
-        </ul>
-    </div>
-</header>
+                <a asp-controller="Home" asp-action="Login">Login</a>
+            </div>
+    </header>
 
-<main>
-    @RenderBody()
-</main>
+    <main>
+        @RenderBody()
+    </main>
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
-@await RenderSectionAsync("Scripts", required: false)
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>
