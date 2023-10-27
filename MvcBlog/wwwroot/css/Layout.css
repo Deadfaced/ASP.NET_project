@@ -2,11 +2,14 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #181818;
-    color: white;
 }
 
 /* navbar */
+
+body{
+    background-color: #181818;
+    color: white;
+}
 
 .content {
     background-color: #181818;
@@ -19,11 +22,13 @@
 }
 
 .navbar {
+    height: 100%;
     width: 70vw;
     display: flex;
     list-style-type: none;
     justify-content: space-between;
     align-items: center;
+    border-bottom: solid 1px #f5c1cd;
 }
 
 a {
