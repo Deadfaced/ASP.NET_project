@@ -195,6 +195,28 @@ public class PostsController : Controller
         return post;
     }
 
+
+    [HttpPost]
+    public JsonResult Delete(int id)
+    {
+        using (
+            SqliteConnection connection = new SqliteConnection(
+                _configuration.GetConnectionString("JapanWandererContext")
+            )
+        )
+        {
+            using (var command = connection.CreateCommand())
+            {
+                connection.Open();
+                command.CommandText = $"DELETE FROM post WHERE Id = '{id}'";
+
+                command.ExecuteNonQuery();
+            }
+        }
+
+        return Json(new Object{});
+    }
+
     ////////////////////////////////   Methods   ////////////////////////////////
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
