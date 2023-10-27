@@ -19,7 +19,7 @@ public class PostsController : Controller
     }
 
     ////////////////////////////////   Actions   ////////////////////////////////
-    
+
     public IActionResult Index()
     {
         var postListViewModel = GetAllPosts();
@@ -32,6 +32,14 @@ public class PostsController : Controller
     }
 
     public IActionResult ViewPost(int id)
+    {
+        var post = GetPostById(id);
+        var postViewModel = new PostViewModel();
+        postViewModel.Post = post;
+        return View(postViewModel);
+    }
+
+    public ActionResult EditPost(int id)
     {
         var post = GetPostById(id);
         var postViewModel = new PostViewModel();
@@ -70,11 +78,40 @@ public class PostsController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    public ActionResult Update(PostModel post)
+    {
+        post.UpdatedAt = DateTime.Now;
+
+        using (
+            SqliteConnection connection = new SqliteConnection(
+                _configuration.GetConnectionString("JapanWandererContext")
+            )
+        )
+        {
+            using (var command = connection.CreateCommand())
+            {
+                connection.Open();
+                command.CommandText =
+                    $"UPDATE post SET title = '{post.Title}', content = '{post.Content}', updatedat = '{post.UpdatedAt}' WHERE Id = '{post.Id}'";
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                }
+                catch (SqliteException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+        }
+
+        return RedirectToAction(nameof(Index));
+    }
 
     ////////////////////////////////   Actions   ////////////////////////////////
 
     ////////////////////////////////   Methods   ////////////////////////////////
-    
+
     internal PostViewModel GetAllPosts()
     {
         List<PostModel> postList = new();
@@ -119,8 +156,6 @@ public class PostsController : Controller
         return new PostViewModel { PostList = postList };
     }
 
-
-
     internal PostModel GetPostById(int id)
     {
         PostModel post = new();
@@ -146,7 +181,7 @@ public class PostsController : Controller
                             post.Title = reader.GetString(1);
                             post.Content = reader.GetString(2);
                             post.CreatedAt = DateTime.Parse(reader.GetString(3));
-                            post.UpdatedAt = DateTime.Parse(reader.GetString(4)); 
+                            post.UpdatedAt = DateTime.Parse(reader.GetString(4));
                         }
                     }
                     else
@@ -159,6 +194,7 @@ public class PostsController : Controller
 
         return post;
     }
+
     ////////////////////////////////   Methods   ////////////////////////////////
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

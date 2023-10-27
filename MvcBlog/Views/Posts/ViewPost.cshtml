@@ -5,3 +5,10 @@
     <p>@Model.Post.Content</p>
     <p>@Model.Post.CreatedAt</p>
 </div>
+
+<div>
+    <ul>
+        <li><a asp-controller="Posts" asp-action="EditPost" asp-route-id="@Model.Post.Id">Edit</a></li>
+        <li><input type="submit" value="Delete" onclick="deletePost(@Model.Post.Id)" /></li>
+    </ul>
+</div>
