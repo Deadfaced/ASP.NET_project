@@ -1,30 +1,29 @@
 @model PostViewModel
 
-<form asp-action="Insert" id="form-action" method="post" class="form-horizontal" role="form">
+<form asp-action="Insert" id="form-action" method="post" role="form">
 
-<div asp-validation-summary="All" class="text-danger"></div>"
+    <div asp-validation-summary="All"></div>
 
-<div class="row justify-content-center">
-    <div class="col-xl-6 col-lg-8 col-md-8 col-sm-10">
-        <label asp-for="Post.Title" class="form-label"></label>
-        <input asp-for="Post.Id" type="hidden" class="form-control" />
-        <input asp-for="Post.Title" class="form-control" />
-        <span asp-validation-for="Post.Title" class="text-danger"></span>
+    <div>
+        <div>
+            <label asp-for="Post.Title"></label>
+            <input asp-for="Post.Id" type="hidden" />
+            <input asp-for="Post.Title" />
+            <span asp-validation-for="Post.Title"></span>
+        </div>
     </div>
-</div>
 
-<div class="row justify-content-center">
-    <div class="col-xl-6 col-lg-8 col-md-8 col-sm-10">
-        <label asp-for="Post.Content" class="form-label"></label>
-        <textarea asp-for="Post.Content" class="form-control" rows="5" cols="40"></textarea>
-        <span asp-validation-for="Post.Content" class="text-danger"></span>
+    <div>
+        <div>
+            <label asp-for="Post.Content"></label>
+            <textarea asp-for="Post.Content"></textarea>
+        </div>
     </div>
-</div>
 
-<div class="row justify-content-center">
-    <div class="col-xl-6 col-lg-8 col-md-8 col-sm-10 mt-3 mb-5">
-        <input type="submit" id="form-button" class="btn btn-success" value="Add Post" />
+    <div>
+        <div>
+            <input type="submit" value="Add Post" />
+        </div>
     </div>
-</div>
 
 </form>

@@ -1,16 +1,16 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\Daniel\\Desktop\\ASP.NET_project\\MvcBlog\\wwwroot\\css\\Index.css",
-      "PackagePath": "staticwebassets\\css\\Index.css"
+      "Id": "C:\\Users\\Daniel\\Desktop\\ASP.NET_project\\MvcBlog\\wwwroot\\css\\Home\\Index.css",
+      "PackagePath": "staticwebassets\\css\\Home\\Index.css"
     },
     {
       "Id": "C:\\Users\\Daniel\\Desktop\\ASP.NET_project\\MvcBlog\\wwwroot\\css\\Layout.css",
       "PackagePath": "staticwebassets\\css\\Layout.css"
     },
     {
-      "Id": "C:\\Users\\Daniel\\Desktop\\ASP.NET_project\\MvcBlog\\wwwroot\\css\\site.css",
-      "PackagePath": "staticwebassets\\css\\site.css"
+      "Id": "C:\\Users\\Daniel\\Desktop\\ASP.NET_project\\MvcBlog\\wwwroot\\css\\Posts\\Index.css",
+      "PackagePath": "staticwebassets\\css\\Posts\\Index.css"
     },
     {
       "Id": "C:\\Users\\Daniel\\Desktop\\ASP.NET_project\\MvcBlog\\wwwroot\\favicon.ico",

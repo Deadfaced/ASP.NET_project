@@ -11,7 +11,6 @@ public class PostsController : Controller
     private readonly ILogger<PostsController> _logger;
 
     private readonly IConfiguration _configuration;
-    private List<PostModel>? postList;
 
     public PostsController(ILogger<PostsController> logger, IConfiguration configuration)
     {
@@ -21,7 +20,8 @@ public class PostsController : Controller
 
     public IActionResult Index()
     {
-        return View();
+        var postListViewModel = GetAllPosts();
+        return View(postListViewModel);
     }
 
     public IActionResult NewPost()
@@ -31,29 +31,36 @@ public class PostsController : Controller
 
     internal PostViewModel GetAllPosts()
     {
-        List<PostModel> postsList = new();
+        List<PostModel> postList = new();
 
-        using (SqliteConnection connection = new SqliteConnection(_configuration.GetConnectionString("JapanWandererContext")))
+        using (
+            SqliteConnection connection = new SqliteConnection(
+                _configuration.GetConnectionString("JapanWandererContext")
+            )
+        )
         {
             using (var command = connection.CreateCommand())
             {
-                command.CommandText = "SELECT * FROM Posts";
                 connection.Open();
+                command.CommandText = $"SELECT * FROM post";
 
                 using (var reader = command.ExecuteReader())
                 {
                     if (reader.HasRows)
                     {
-                        postsList.Add(
-                            new PostModel
-                            {
-                                Id = reader.GetInt32(0),
-                                Title = reader.GetString(1),
-                                Content = reader.GetString(2),
-                                Created = reader.GetDateTime(4),
-                                Updated = reader.GetDateTime(5),
-                            }
-                        );
+                        while (reader.Read())
+                        {
+                            postList.Add(
+                                new PostModel
+                                {
+                                    Id = reader.GetInt32(0),
+                                    Title = reader.GetString(1),
+                                    Content = reader.GetString(2),
+                                    CreatedAt = DateTime.Parse(reader.GetString(3)),
+                                    UpdatedAt = DateTime.Parse(reader.GetString(4))
+                                }
+                            );
+                        }
                     }
                     else
                     {
@@ -68,12 +75,20 @@ public class PostsController : Controller
 
     public ActionResult Insert(PostModel post)
     {
-        using (SqliteConnection connection = new SqliteConnection(_configuration.GetConnectionString("JapanWandererContext")))
+        post.CreatedAt = DateTime.Now;
+        post.UpdatedAt = DateTime.Now;
+
+        using (
+            SqliteConnection connection = new SqliteConnection(
+                _configuration.GetConnectionString("JapanWandererContext")
+            )
+        )
         {
             using (var command = connection.CreateCommand())
             {
                 connection.Open();
-                command.CommandText = "INSERT INTO Posts (Title, Content, Created, Updated) VALUES ('{post.Title}', '{post.Content}', '{post.Created}', '{post.Updated}')";
+                command.CommandText =
+                    $"INSERT INTO post (title, content, createdat, updatedat) VALUES ('{post.Title}', '{post.Content}', '{post.CreatedAt}', '{post.UpdatedAt}')";
 
                 try
                 {

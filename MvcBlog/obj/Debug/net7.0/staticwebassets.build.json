@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ywIdMZ9ZzIl5XILaOD89uyN3vuComxqiMux2Im1u1vI=",
+  "Hash": "XX9QcECPf+xT8hFB6ApZxI5KHWHkfZecmJwl4RN8/nA=",
   "Source": "MvcBlog",
   "BasePath": "_content/MvcBlog",
   "Mode": "Default",
@@ -17,12 +17,12 @@
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\Daniel\\Desktop\\ASP.NET_project\\MvcBlog\\wwwroot\\css\\Index.css",
+      "Identity": "C:\\Users\\Daniel\\Desktop\\ASP.NET_project\\MvcBlog\\wwwroot\\css\\Home\\Index.css",
       "SourceId": "MvcBlog",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Daniel\\Desktop\\ASP.NET_project\\MvcBlog\\wwwroot\\",
       "BasePath": "_content/MvcBlog",
-      "RelativePath": "css/Index.css",
+      "RelativePath": "css/Home/Index.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -31,7 +31,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\Index.css"
+      "OriginalItemSpec": "wwwroot\\css\\Home\\Index.css"
     },
     {
       "Identity": "C:\\Users\\Daniel\\Desktop\\ASP.NET_project\\MvcBlog\\wwwroot\\css\\Layout.css",
@@ -51,12 +51,12 @@
       "OriginalItemSpec": "wwwroot\\css\\Layout.css"
     },
     {
-      "Identity": "C:\\Users\\Daniel\\Desktop\\ASP.NET_project\\MvcBlog\\wwwroot\\css\\site.css",
+      "Identity": "C:\\Users\\Daniel\\Desktop\\ASP.NET_project\\MvcBlog\\wwwroot\\css\\Posts\\Index.css",
       "SourceId": "MvcBlog",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Daniel\\Desktop\\ASP.NET_project\\MvcBlog\\wwwroot\\",
       "BasePath": "_content/MvcBlog",
-      "RelativePath": "css/site.css",
+      "RelativePath": "css/Posts/Index.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -65,7 +65,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\site.css"
+      "OriginalItemSpec": "wwwroot\\css\\Posts\\Index.css"
     },
     {
       "Identity": "C:\\Users\\Daniel\\Desktop\\ASP.NET_project\\MvcBlog\\wwwroot\\favicon.ico",

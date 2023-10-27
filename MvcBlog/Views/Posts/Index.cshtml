@@ -2,6 +2,26 @@
     ViewData["Title"] = "Post";
 }
 
+<link rel="stylesheet" href="~/css/Posts/Index.css " asp-append-version="true" />
+
 @model PostViewModel
 
-<a asp-controller="Posts" asp-action="NewPost">New Post</a>
+<div class="allPage">
+
+    <a asp-controller="Posts" asp-action="NewPost">New Post</a>
+
+    <div>
+        @foreach (var p in Model.PostList)
+        {
+            <div class="post">
+                <h2><a asp-controller="Posts" asp-action="ViewPost" asp-route-id="@p.Id">@p.Title</a></h2>
+                <h5>@p.UpdatedAt</h5>
+                <p>@p.Content</p>
+            </div>
+        }
+    </div>
+
+
+
+
+</div>

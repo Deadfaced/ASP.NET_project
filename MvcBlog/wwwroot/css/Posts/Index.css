@@ -1,0 +1,13 @@
+main * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main .allPage {
+    background-color: #181818;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
