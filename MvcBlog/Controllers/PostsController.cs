@@ -18,6 +18,8 @@ public class PostsController : Controller
         _configuration = configuration;
     }
 
+    ////////////////////////////////   Actions   ////////////////////////////////
+
     public IActionResult Index()
     {
         var postListViewModel = GetAllPosts();
@@ -28,6 +30,87 @@ public class PostsController : Controller
     {
         return View();
     }
+
+    public IActionResult ViewPost(int id)
+    {
+        var post = GetPostById(id);
+        var postViewModel = new PostViewModel();
+        postViewModel.Post = post;
+        return View(postViewModel);
+    }
+
+    public ActionResult EditPost(int id)
+    {
+        var post = GetPostById(id);
+        var postViewModel = new PostViewModel();
+        postViewModel.Post = post;
+        return View(postViewModel);
+    }
+
+    public ActionResult Insert(PostModel post)
+    {
+        post.CreatedAt = DateTime.Now;
+        post.UpdatedAt = DateTime.Now;
+
+        using (
+            SqliteConnection connection = new SqliteConnection(
+                _configuration.GetConnectionString("JapanWandererContext")
+            )
+        )
+        {
+            using (var command = connection.CreateCommand())
+            {
+                connection.Open();
+                command.CommandText =
+                    $"INSERT INTO post (title, content, createdat, updatedat) VALUES ('{post.Title}', '{post.Content}', '{post.CreatedAt}', '{post.UpdatedAt}')";
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                }
+                catch (SqliteException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+        }
+
+        return RedirectToAction(nameof(Index));
+    }
+
+    public ActionResult Update(PostModel post)
+    {
+        post.UpdatedAt = DateTime.Now;
+
+        using (
+            SqliteConnection connection = new SqliteConnection(
+                _configuration.GetConnectionString("JapanWandererContext")
+            )
+        )
+        {
+            using (var command = connection.CreateCommand())
+            {
+                connection.Open();
+                command.CommandText =
+                    $"UPDATE post SET title = '{post.Title}', content = '{post.Content}', updatedat = '{post.UpdatedAt}' WHERE Id = '{post.Id}'";
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                }
+                catch (SqliteException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+        }
+
+        return RedirectToAction(nameof(Index));
+    }
+
+    ////////////////////////////////   Actions   ////////////////////////////////
+
+    ////////////////////////////////   Methods   ////////////////////////////////
 
     internal PostViewModel GetAllPosts()
     {
@@ -73,10 +156,9 @@ public class PostsController : Controller
         return new PostViewModel { PostList = postList };
     }
 
-    public ActionResult Insert(PostModel post)
+    internal PostModel GetPostById(int id)
     {
-        post.CreatedAt = DateTime.Now;
-        post.UpdatedAt = DateTime.Now;
+        PostModel post = new();
 
         using (
             SqliteConnection connection = new SqliteConnection(
@@ -87,22 +169,55 @@ public class PostsController : Controller
             using (var command = connection.CreateCommand())
             {
                 connection.Open();
-                command.CommandText =
-                    $"INSERT INTO post (title, content, createdat, updatedat) VALUES ('{post.Title}', '{post.Content}', '{post.CreatedAt}', '{post.UpdatedAt}')";
+                command.CommandText = $"SELECT * FROM post WHERE Id = '{id}'";
 
-                try
+                using (var reader = command.ExecuteReader())
                 {
-                    command.ExecuteNonQuery();
-                }
-                catch (SqliteException ex)
-                {
-                    Console.WriteLine(ex.Message);
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            post.Id = reader.GetInt32(0);
+                            post.Title = reader.GetString(1);
+                            post.Content = reader.GetString(2);
+                            post.CreatedAt = DateTime.Parse(reader.GetString(3));
+                            post.UpdatedAt = DateTime.Parse(reader.GetString(4));
+                        }
+                    }
+                    else
+                    {
+                        return post;
+                    }
                 }
             }
         }
 
-        return RedirectToAction(nameof(Index));
+        return post;
     }
+
+
+    [HttpPost]
+    public JsonResult Delete(int id)
+    {
+        using (
+            SqliteConnection connection = new SqliteConnection(
+                _configuration.GetConnectionString("JapanWandererContext")
+            )
+        )
+        {
+            using (var command = connection.CreateCommand())
+            {
+                connection.Open();
+                command.CommandText = $"DELETE FROM post WHERE Id = '{id}'";
+
+                command.ExecuteNonQuery();
+            }
+        }
+
+        return Json(new Object{});
+    }
+
+    ////////////////////////////////   Methods   ////////////////////////////////
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()

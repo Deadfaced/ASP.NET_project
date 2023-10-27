@@ -1,3 +1,5 @@
+using MvcBlog.Models.ViewModels;
+
 namespace MvcBlog.Models;
 
 public class PostModel

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "u6i+NOd90iq1yVwN7J6yvOGk/v2I/FxLZLAmvqAA3FI=",
+  "Hash": "p2B8pntr18XqhQWBWHZmKlho5FeB6WVc/vdj4sLPMpE=",
   "Source": "MvcBlog",
   "BasePath": "_content/MvcBlog",
   "Mode": "Default",
@@ -16,40 +16,6 @@
     }
   ],
   "Assets": [
-    {
-      "Identity": "C:\\Users\\Daniel\\Desktop\\ASP.NET_project\\MvcBlog\\obj\\Debug\\net7.0\\scopedcss\\bundle\\MvcBlog.styles.css",
-      "SourceId": "MvcBlog",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\Daniel\\Desktop\\ASP.NET_project\\MvcBlog\\obj\\Debug\\net7.0\\scopedcss\\bundle\\",
-      "BasePath": "_content/MvcBlog",
-      "RelativePath": "MvcBlog.styles.css",
-      "AssetKind": "All",
-      "AssetMode": "CurrentProject",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "ScopedCss",
-      "AssetTraitValue": "ApplicationBundle",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Daniel\\Desktop\\ASP.NET_project\\MvcBlog\\obj\\Debug\\net7.0\\scopedcss\\bundle\\MvcBlog.styles.css"
-    },
-    {
-      "Identity": "C:\\Users\\Daniel\\Desktop\\ASP.NET_project\\MvcBlog\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\MvcBlog.bundle.scp.css",
-      "SourceId": "MvcBlog",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\Daniel\\Desktop\\ASP.NET_project\\MvcBlog\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\",
-      "BasePath": "_content/MvcBlog",
-      "RelativePath": "MvcBlog.bundle.scp.css",
-      "AssetKind": "All",
-      "AssetMode": "Reference",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "ScopedCss",
-      "AssetTraitValue": "ProjectBundle",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Daniel\\Desktop\\ASP.NET_project\\MvcBlog\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\MvcBlog.bundle.scp.css"
-    },
     {
       "Identity": "C:\\Users\\Daniel\\Desktop\\ASP.NET_project\\MvcBlog\\wwwroot\\css\\Home\\Index.css",
       "SourceId": "MvcBlog",
