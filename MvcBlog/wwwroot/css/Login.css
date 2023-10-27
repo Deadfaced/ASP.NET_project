@@ -14,6 +14,7 @@
 
 form{
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
     align-items: center;
     width: 50dvw;
@@ -21,6 +22,15 @@ form{
     background-color: #292929;
     border-radius: 8px;
     padding: 2rem;
+}
+
+.alignment{
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+}
+.alignment input{
+    width: 70%;
 }
 
 
