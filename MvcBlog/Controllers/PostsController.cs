@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.Sqlite;
 using MvcBlog.Models;
@@ -139,8 +140,8 @@ public class PostsController : Controller
                                     Id = reader.GetInt32(0),
                                     Title = reader.GetString(1),
                                     Content = reader.GetString(2),
-                                    CreatedAt = DateTime.Parse(reader.GetString(3)),
-                                    UpdatedAt = DateTime.Parse(reader.GetString(4))
+                                    CreatedAt = DateTime.ParseExact(reader.GetString(3), "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture),
+                                    UpdatedAt = DateTime.ParseExact(reader.GetString(4), "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture)
                                 }
                             );
                         }
