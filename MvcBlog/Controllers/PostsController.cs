@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Globalization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.Sqlite;
 using MvcBlog.Models;
@@ -12,6 +13,8 @@ public class PostsController : Controller
     private readonly ILogger<PostsController> _logger;
 
     private readonly IConfiguration _configuration;
+
+    string[] formats = { "dd/MM/yyyy HH:mm:ss", "MM/dd/yyyy HH:mm:ss" , "MM/dd/yyyy H:mm:ss"};
 
     public PostsController(ILogger<PostsController> logger, IConfiguration configuration)
     {
@@ -134,14 +137,19 @@ public class PostsController : Controller
                     {
                         while (reader.Read())
                         {
+                            DateTime parsedCreateDate;
+                            DateTime parsedUpdateDate;
+                            DateTime.TryParseExact(reader.GetString(3), formats, CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedCreateDate);
+                            DateTime.TryParseExact(reader.GetString(4), formats, CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedUpdateDate);
+
                             postList.Add(
                                 new PostModel
                                 {
                                     Id = reader.GetInt32(0),
                                     Title = reader.GetString(1),
                                     Content = reader.GetString(2),
-                                    CreatedAt = DateTime.ParseExact(reader.GetString(3), "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture),
-                                    UpdatedAt = DateTime.ParseExact(reader.GetString(4), "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture)
+                                    CreatedAt = parsedCreateDate,
+                                    UpdatedAt = parsedUpdateDate
                                 }
                             );
                         }
