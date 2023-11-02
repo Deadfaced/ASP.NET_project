@@ -14,7 +14,7 @@ public class PostsController : Controller
 
     private readonly IConfiguration _configuration;
 
-    string[] formats = { "dd/MM/yyyy HH:mm:ss", "MM/dd/yyyy HH:mm:ss" , "MM/dd/yyyy H:mm:ss"};
+    string[] formats = { "dd/MM/yyyy HH:mm:ss", "MM/dd/yyyy HH:mm:ss" , "MM/dd/yyyy H:mm:ss" };
 
     public PostsController(ILogger<PostsController> logger, IConfiguration configuration)
     {

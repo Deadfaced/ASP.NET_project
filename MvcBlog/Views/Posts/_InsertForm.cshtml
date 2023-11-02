@@ -1,29 +1,25 @@
 @model PostViewModel
 
-<form asp-action="Insert" method="post">
+<link rel="stylesheet" href="~/css/Posts/CreatePost.css " asp-append-version="true" />
+
+<form asp-action="Insert" method="post" class=newPost>
 
     <div asp-validation-summary="All"></div>
 
     <div>
-        <div>
             <label asp-for="Post.Title"></label>
             <input asp-for="Post.Id" type="hidden" />
             <input asp-for="Post.Title" />
             <span asp-validation-for="Post.Title"></span>
-        </div>
     </div>
     
     <div>
-        <div>
-            <label asp-for="Post.Content"></label>
-            <textarea asp-for="Post.Content"></textarea>
-        </div>
+        <label asp-for="Post.Content"></label>
+        <textarea asp-for="Post.Content"></textarea>
     </div>
 
     <div>
-        <div>
-            <input type="submit" value="Add Post" />
-        </div>
+        <input type="submit" value="Add Post" />
     </div>
 
 </form>
