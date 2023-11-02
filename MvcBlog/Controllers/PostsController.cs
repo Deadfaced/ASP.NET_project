@@ -186,11 +186,16 @@ public class PostsController : Controller
                     {
                         while (reader.Read())
                         {
+                            DateTime parsedCreateDate;
+                            DateTime parsedUpdateDate;
+                            DateTime.TryParseExact(reader.GetString(3), formats, CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedCreateDate);
+                            DateTime.TryParseExact(reader.GetString(4), formats, CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedUpdateDate);
+
                             post.Id = reader.GetInt32(0);
                             post.Title = reader.GetString(1);
                             post.Content = reader.GetString(2);
-                            post.CreatedAt = DateTime.Parse(reader.GetString(3));
-                            post.UpdatedAt = DateTime.Parse(reader.GetString(4));
+                            post.CreatedAt = parsedCreateDate;
+                            post.UpdatedAt = parsedUpdateDate;
                         }
                     }
                     else
