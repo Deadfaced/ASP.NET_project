@@ -1,14 +1,27 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@using MvcBlog.Areas.Identity.Data
+
+@inject SignInManager<MvcBlogUser> SignInManager
+@inject UserManager<MvcBlogUser> UserManager
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<link rel="stylesheet" href="~/css/Home/Index.css " asp-append-version="true"/>
+<link rel="stylesheet" href="~/css/Home/Index.css " asp-append-version="true" />
 
 <div class="allPage">
 
     <div class="container">
-        
+
         <div class="homeImage"></div>
+
+        @if (User.IsInRole("Admin"))
+        {
+            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Logout</button>
+        </form>
+        }
 
         <div class="exploreCities">
             <h1>Explore cities</h1>
@@ -23,22 +36,22 @@
                     <img src="~/images/yokohama.jpg" alt="Yokohama">
                     <p>Yokohama</p>
                 </div>
-                
+
                 <div class="exploreCitiesImgCard">
                     <img src="~/images/osaka.jpg" alt="Osaka">
                     <p>Osaka</p>
                 </div>
-                
+
                 <div class="exploreCitiesImgCard">
                     <img src="~/images/nagoya.jpg" alt="Nagoya">
                     <p>Nagoya</p>
                 </div>
-                
+
                 <div class="exploreCitiesImgCard">
                     <img src="~/images/sapporo.jpg" alt="Sapporo">
                     <p>Sapporo</p>
                 </div>
-                
+
                 <div class="exploreCitiesImgCard">
                     <img src="~/images/fukuoka.jpg" alt="Fukuoka">
                     <p>Fukuoka</p>
