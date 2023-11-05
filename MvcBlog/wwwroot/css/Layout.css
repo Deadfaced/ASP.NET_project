@@ -40,7 +40,6 @@ main {
     list-style-type: none;
     justify-content: space-between;
     align-items: center;
-    border-bottom: solid 1px #f5c1cd;
 }
 
 a {
@@ -54,7 +53,7 @@ a {
     font-size: 4rem;
 }
 
-li a:not(.big):hover {
+.navbar a:not(.big):hover {
     color: red;
 }
 /* navbar */

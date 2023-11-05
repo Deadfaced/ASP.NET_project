@@ -1,0 +1,48 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.Register_BigContainer {
+    width: 70vw;
+    height: 65vh;
+    background-image: url(../../images/Login2.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.RegisterForm {
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.RegisterForm form {
+    margin-left: 13%;
+}
+
+.RegisterFormItem {
+    display: flex;
+    flex-direction: column;
+    margin: 4%;
+}
+
+.RegisterFormItem *{
+    margin: 0.06rem 0;
+}
+
+.RegisterForm button {
+    width: 50%;
+    margin: 4% 22.5%;
+    padding: 2%;
+    border-radius: 10px;
+    border: none;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
