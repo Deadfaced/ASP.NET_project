@@ -1,13 +1,5 @@
-﻿@using Microsoft.AspNetCore.Identity
-@using MvcBlog.Areas.Identity.Data
-
-@inject UserManager<MvcBlogUser> UserManager
-
-@{
-    var user = await UserManager.GetUserAsync(User);
-}
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
+@model PostViewModel
 <html lang="en">
 
 <head>
@@ -24,33 +16,112 @@
                 <a asp-controller="Posts" asp-action="Index">Posts</a>
                 <a asp-controller="About" asp-action="Index">About</a>
                 <a asp-controller="Home" asp-action="Index" class="big">JapanWanderer</a>
-                @if (User.IsInRole("Admin"))
-                {
-                    <a asp-controller="Admin" asp-action="Manage">Manage</a>
-                    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
-                        asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                        <button id="logout" type="submit">Logout</button>
-                    </form>
-                }
-                else if (User.IsInRole("User"))
-                {
-                    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
-                        asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                        <button type="submit">Logout</button>
-                    </form>
-                    <a>@user.FirstName</a>
-                }
-                else
-                {
-                    <a asp-area="Identity" asp-page="/Account/Register">Register</a>
-                    <a asp-area="Identity" asp-page="/Account/Login">Login</a>
-                }
+                <a asp-area="Identity" asp-page="/Account/Register">Register</a>
+                <a asp-area="Identity" asp-page="/Account/Login">Login</a>
             </div>
         </div>
     </header>
 
     <main>
-        @RenderBody()
+        <div class="pageContent">
+
+            <div class="mainContent">
+                @RenderBody()
+            </div>
+
+            <div class="sidebar">
+                <h1>Browse by year and month</h1>
+                <ul class="yearList">
+                    <li class="dropdown">
+                        <span class="year">2023</span>
+                        <ul class="dropdown-content">
+                            <li>January</li>
+                            <li>February</li>
+                            <li>March</li>
+                            <li>April</li>
+                            <li>May</li>
+                            <li>June</li>
+                            <li>July</li>
+                            <li>August</li>
+                            <li>September</li>
+                            <li>October</li>
+                            <li>November</li>
+                            <li>December</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <span class="year">2022</span>
+                        <ul class="dropdown-content">
+                            <li>January</li>
+                            <li>February</li>
+                            <li>March</li>
+                            <li>April</li>
+                            <li>May</li>
+                            <li>June</li>
+                            <li>July</li>
+                            <li>August</li>
+                            <li>September</li>
+                            <li>October</li>
+                            <li>November</li>
+                            <li>December</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <span class="year">2021</span>
+                        <ul class="dropdown-content">
+                            <li>January</li>
+                            <li>February</li>
+                            <li>March</li>
+                            <li>April</li>
+                            <li>May</li>
+                            <li>June</li>
+                            <li>July</li>
+                            <li>August</li>
+                            <li>September</li>
+                            <li>October</li>
+                            <li>November</li>
+                            <li>December</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <span class="year">2020</span>
+                        <ul class="dropdown-content">
+                            <li>January</li>
+                            <li>February</li>
+                            <li>March</li>
+                            <li>April</li>
+                            <li>May</li>
+                            <li>June</li>
+                            <li>July</li>
+                            <li>August</li>
+                            <li>September</li>
+                            <li>October</li>
+                            <li>November</li>
+                            <li>December</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <span class="year">2019</span>
+                        <ul class="dropdown-content">
+                            <li>January</li>
+                            <li>February</li>
+                            <li>March</li>
+                            <li>April</li>
+                            <li>May</li>
+                            <li>June</li>
+                            <li>July</li>
+                            <li>August</li>
+                            <li>September</li>
+                            <li>October</li>
+                            <li>November</li>
+                            <li>December</li>
+                        </ul>
+                    </li>
+                    <!-- Repeat the above structure for other years -->
+                </ul>
+
+            </div>
+        </div>
     </main>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

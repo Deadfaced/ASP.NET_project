@@ -5,21 +5,20 @@
 <form asp-action="Insert" method="post" class=newPost>
 
     <div asp-validation-summary="All"></div>
-
-    <div>
-            <label asp-for="Post.Title"></label>
+    
+    <h1>Create a new post</h1>
+    <div class="postTitle">
             <input asp-for="Post.Id" type="hidden" />
-            <input asp-for="Post.Title" />
+            <input asp-for="Post.Title" placeholder="Title"/>
             <span asp-validation-for="Post.Title"></span>
     </div>
     
-    <div>
-        <label asp-for="Post.Content"></label>
-        <textarea asp-for="Post.Content"></textarea>
+    <div class="postContent">
+        <textarea asp-for="Post.Content" placeholder="Tell us your travel experience"></textarea>
     </div>
 
     <div>
-        <input type="submit" value="Add Post" />
+        <button type="submit" value="Add Post"> Add Post </button>
     </div>
 
 </form>
