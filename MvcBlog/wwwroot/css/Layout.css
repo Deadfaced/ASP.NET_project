@@ -47,6 +47,25 @@ main .sidebar{
     padding: 5rem;
 }
 
+.content {
+    background-color: #181818;
+    user-select: none;
+    height: 20vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar {
+    height: 100%;
+    width: 70vw;
+    display: flex;
+    list-style-type: none;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: #A52A2A 1px solid;
+}
 
 a {
     font-size: 1.4rem;
@@ -55,13 +74,31 @@ a {
     text-decoration: none;
 }
 
+button
+{
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
 .big {
     font-size: 4rem;
 }
 
-li a:not(.big):hover {
+.navbar a:not(.big):hover {
     color: red;
 }
+
+.navbar button:hover{
+    color: red;
+}
+/* navbar */
+
+
 
 .sidebar h1{
     padding: 2rem 0;
@@ -103,3 +140,5 @@ li a:not(.big):hover {
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
+
