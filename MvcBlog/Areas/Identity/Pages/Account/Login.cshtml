@@ -9,33 +9,33 @@
 <div class="Login_BigContainer">
 
     <div class="LoginForm">
+        
+            <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
 
-        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <h1>Welcome back</h1>
 
-            <h1>Welcome back</h1>
+                <div asp-validation-summary="ModelOnly" role="alert"></div>
 
-            <div asp-validation-summary="ModelOnly" role="alert"></div>
-
-            <div class="LoginFormItem">
+                <div class="LoginFormItem">
                 <label asp-for="Input.Email">Email</label>
-                <input asp-for="Input.Email" autocomplete="off" AutoCompleteType="Disabled" aria-required="true" />
-                <span asp-validation-for="Input.Email"></span>
-            </div>
-            <div class="LoginFormItem">
-                <label asp-for="Input.Password">Password</label>
+                    <input asp-for="Input.Email" autocomplete="off" AutoCompleteType="Disabled" aria-required="true" />
+                    <span asp-validation-for="Input.Email"></span>
+                </div>
+                <div class="LoginFormItem">
+                    <label asp-for="Input.Password">Password</label>
                 <input asp-for="Input.Password" autocomplete="off" AutoCompleteType="Disabled" aria-required="true" />
-                <span asp-validation-for="Input.Password"></span>
-            </div>
-
+                    <span asp-validation-for="Input.Password"></span>
+                </div>
+                
             <div class="LoginFormItem">
-                <label asp-for="Input.RememberMe">
-                    <input asp-for="Input.RememberMe" />
-                    @Html.DisplayNameFor(m => m.Input.RememberMe)
-                </label>
-            </div>
-            <button type="submit">Log in</button>
-        </form>
-    </div>
+                    <label asp-for="Input.RememberMe">
+                        <input asp-for="Input.RememberMe" />
+                        @Html.DisplayNameFor(m => m.Input.RememberMe)
+                    </label>
+                </div>
+                <button type="submit">Log in</button>
+                                    </form>
+                    </div>
 </div>
 
 @section Scripts {
