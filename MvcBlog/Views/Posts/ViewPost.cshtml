@@ -1,14 +1,18 @@
 @model PostViewModel
 
-<div>
-    <h2>@Model.Post.Title</h2>
-    <p>@Model.Post.Content</p>
-    <p>@Model.Post.CreatedAt</p>
-</div>
+<link rel="stylesheet" href="~/css/Posts/ViewPost.css " asp-append-version="true" />
 
-<div>
-    <ul>
-        <li><a asp-controller="Posts" asp-action="EditPost" asp-route-id="@Model.Post.Id">Edit</a></li>
-        <li><input type="submit" value="Delete" onclick="deletePost(@Model.Post.Id)" /></li>
-    </ul>
+<div class="post">
+    <div class="postHeader">
+        <h2><a asp-controller="Posts" asp-action="ViewPost" asp-route-id="@Model.Post.Id">@Model.Post.Title</a></h2>
+        <h5>@Model.Post.UpdatedAt</h5>
+    </div>
+    <p>@Model.Post.Content</p>
+
+    <div class="actions">
+        <ul>
+            <li><a asp-controller="Posts" asp-action="EditPost" asp-route-id="@Model.Post.Id">Edit</a></li>
+            <li><input type="submit" value="Delete" onclick="deletePost(@Model.Post.Id)" /></li>
+        </ul>
+    </div>
 </div>

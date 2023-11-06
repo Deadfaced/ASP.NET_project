@@ -49,11 +49,26 @@ a {
     text-decoration: none;
 }
 
+button
+{
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
 .big {
     font-size: 4rem;
 }
 
 .navbar a:not(.big):hover {
+    color: red;
+}
+
+.navbar button:hover{
     color: red;
 }
 /* navbar */

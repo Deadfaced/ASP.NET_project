@@ -1,0 +1,56 @@
+main * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main .allPage {
+    background-color: #181818;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+main .postList{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+main .post{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 100%;
+    height: 15rem;
+    background-color: black;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    margin-top: 2rem;
+    border-radius: 16px;
+}
+
+main .post h2{
+    font-weight: 900;
+}
+
+main .post p{
+    height: 60%;
+    width: 100%;
+    border-radius: 4px;
+    padding: 0.5rem 2rem;
+    font-size: large;
+    border: 1px solid #f5c1cd;
+}
+
+main .newPostTitle{
+    margin: 2rem 0;
+    width: 90%;
+    justify-content: left;
+    color: #f5c1cd;
+    font-weight: 900;
+    text-decoration: underline;
+}

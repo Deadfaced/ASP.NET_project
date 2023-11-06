@@ -5,7 +5,6 @@ using MvcBlog.Areas.Identity.Data;
 using MvcBlog.Models;
 using MvcBlog.Models.ViewModels;
 
-
 namespace MvcBlog.Controllers;
 
 public class HomeController : Controller
@@ -22,16 +21,6 @@ public class HomeController : Controller
     public IActionResult Index()
     {
         ViewData["UserID"] = _userManager.GetUserId(this.User);
-        return View();
-    }
-
-    public IActionResult About()
-    {
-        return View();
-    }
-
-    public IActionResult Login()
-    {
         return View();
     }
 
