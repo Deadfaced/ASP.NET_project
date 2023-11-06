@@ -1,18 +1,117 @@
 @model PostViewModel
 
 <link rel="stylesheet" href="~/css/Posts/ViewPost.css " asp-append-version="true" />
+<div class="allPage">
 
-<div class="post">
-    <div class="postHeader">
-        <h2><a asp-controller="Posts" asp-action="ViewPost" asp-route-id="@Model.Post.Id">@Model.Post.Title</a></h2>
-        <h5>@Model.Post.UpdatedAt</h5>
+    <div class="mainContent">
+
+        <div class="post">
+            <div class="postHeader">
+                <h2><a asp-controller="Posts" asp-action="ViewPost" asp-route-id="@Model.Post.Id">@Model.Post.Title</a></h2>
+                <h5>@Model.Post.UpdatedAt</h5>
+            </div>
+            <p>@Model.Post.Content</p>
+
+            <div class="actions">
+                <ul>
+                    <li><a asp-controller="Posts" asp-action="EditPost" asp-route-id="@Model.Post.Id">Edit</a></li>
+                    <li><input type="submit" value="Delete" onclick="deletePost(@Model.Post.Id)" /></li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <p>@Model.Post.Content</p>
 
-    <div class="actions">
-        <ul>
-            <li><a asp-controller="Posts" asp-action="EditPost" asp-route-id="@Model.Post.Id">Edit</a></li>
-            <li><input type="submit" value="Delete" onclick="deletePost(@Model.Post.Id)" /></li>
+    <div class="sidebar">
+        <h1>Browse by year and month</h1>
+        <ul class="yearList">
+            <li class="dropdown">
+                <span class="year">2023</span>
+                <ul class="dropdown-content">
+                    <li>January</li>
+                    <li>February</li>
+                    <li>March</li>
+                    <li>April</li>
+                    <li>May</li>
+                    <li>June</li>
+                    <li>July</li>
+                    <li>August</li>
+                    <li>September</li>
+                    <li>October</li>
+                    <li>November</li>
+                    <li>December</li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <span class="year">2022</span>
+                <ul class="dropdown-content">
+                    <li>January</li>
+                    <li>February</li>
+                    <li>March</li>
+                    <li>April</li>
+                    <li>May</li>
+                    <li>June</li>
+                    <li>July</li>
+                    <li>August</li>
+                    <li>September</li>
+                    <li>October</li>
+                    <li>November</li>
+                    <li>December</li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <span class="year">2021</span>
+                <ul class="dropdown-content">
+                    <li>January</li>
+                    <li>February</li>
+                    <li>March</li>
+                    <li>April</li>
+                    <li>May</li>
+                    <li>June</li>
+                    <li>July</li>
+                    <li>August</li>
+                    <li>September</li>
+                    <li>October</li>
+                    <li>November</li>
+                    <li>December</li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <span class="year">2020</span>
+                <ul class="dropdown-content">
+                    <li>January</li>
+                    <li>February</li>
+                    <li>March</li>
+                    <li>April</li>
+                    <li>May</li>
+                    <li>June</li>
+                    <li>July</li>
+                    <li>August</li>
+                    <li>September</li>
+                    <li>October</li>
+                    <li>November</li>
+                    <li>December</li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <span class="year">2019</span>
+                <ul class="dropdown-content">
+                    <li>January</li>
+                    <li>February</li>
+                    <li>March</li>
+                    <li>April</li>
+                    <li>May</li>
+                    <li>June</li>
+                    <li>July</li>
+                    <li>August</li>
+                    <li>September</li>
+                    <li>October</li>
+                    <li>November</li>
+                    <li>December</li>
+                </ul>
+            </li>
+            <!-- Repeat the above structure for other years -->
         </ul>
+
     </div>
+
 </div>

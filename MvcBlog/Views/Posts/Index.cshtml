@@ -8,19 +8,116 @@
 
 <div class="allPage">
 
-    <a asp-controller="Posts" asp-action="NewPost" class="newPostTitle">New Post</a>
+    <div class="mainContent">
 
-    <div class="postList">
-        @foreach (var p in Model.PostList)
-        {
-            <div class="post">
-                <div class="postHeader">
-                    <h2><a asp-controller="Posts" asp-action="ViewPost" asp-route-id="@p.Id">@p.Title</a></h2>
-                    <h5>@p.UpdatedAt</h5>
+        <a asp-controller="Posts" asp-action="NewPost" class="newPostTitle">New Post</a>
+
+        <div class="postList">
+            @foreach (var p in Model.PostList)
+            {
+                <div class="post">
+                    <div class="postHeader">
+                        <h2><a asp-controller="Posts" asp-action="ViewPost" asp-route-id="@p.Id">@p.Title</a></h2>
+                        <h5>@p.UpdatedAt</h5>
+                    </div>
+                    <p>@p.Content</p>
                 </div>
-                <p>@p.Content</p>
-            </div>
-        }
+            }
+        </div>
+    </div>
+
+
+    <div class="sidebar">
+        <h1>Browse by year and month</h1>
+        <ul class="yearList">
+            <li class="dropdown">
+                <span class="year">2023</span>
+                <ul class="dropdown-content">
+                    <li>January</li>
+                    <li>February</li>
+                    <li>March</li>
+                    <li>April</li>
+                    <li>May</li>
+                    <li>June</li>
+                    <li>July</li>
+                    <li>August</li>
+                    <li>September</li>
+                    <li>October</li>
+                    <li>November</li>
+                    <li>December</li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <span class="year">2022</span>
+                <ul class="dropdown-content">
+                    <li>January</li>
+                    <li>February</li>
+                    <li>March</li>
+                    <li>April</li>
+                    <li>May</li>
+                    <li>June</li>
+                    <li>July</li>
+                    <li>August</li>
+                    <li>September</li>
+                    <li>October</li>
+                    <li>November</li>
+                    <li>December</li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <span class="year">2021</span>
+                <ul class="dropdown-content">
+                    <li>January</li>
+                    <li>February</li>
+                    <li>March</li>
+                    <li>April</li>
+                    <li>May</li>
+                    <li>June</li>
+                    <li>July</li>
+                    <li>August</li>
+                    <li>September</li>
+                    <li>October</li>
+                    <li>November</li>
+                    <li>December</li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <span class="year">2020</span>
+                <ul class="dropdown-content">
+                    <li>January</li>
+                    <li>February</li>
+                    <li>March</li>
+                    <li>April</li>
+                    <li>May</li>
+                    <li>June</li>
+                    <li>July</li>
+                    <li>August</li>
+                    <li>September</li>
+                    <li>October</li>
+                    <li>November</li>
+                    <li>December</li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <span class="year">2019</span>
+                <ul class="dropdown-content">
+                    <li>January</li>
+                    <li>February</li>
+                    <li>March</li>
+                    <li>April</li>
+                    <li>May</li>
+                    <li>June</li>
+                    <li>July</li>
+                    <li>August</li>
+                    <li>September</li>
+                    <li>October</li>
+                    <li>November</li>
+                    <li>December</li>
+                </ul>
+            </li>
+            <!-- Repeat the above structure for other years -->
+        </ul>
+
     </div>
 
 

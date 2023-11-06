@@ -8,10 +8,33 @@ main .allPage {
     background-color: #181818;
     width: 100%;
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
+
+main .sidebar{
+    height: 100%;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 5rem;
+}
+
+
+main .mainContent{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: auto;
+}
+
+
+
+
 
 main .postList{
     display: flex;
@@ -48,7 +71,49 @@ main .newPostTitle{
     margin: 2rem 0;
     width: 90%;
     justify-content: left;
-    color: #f5c1cd;
+    color: #A52A2A;
     font-weight: 900;
     text-decoration: underline;
+}
+
+
+.sidebar h1{
+    padding: 2rem 0;
+}
+
+.yearList{
+    display: flex;
+    flex-direction: column;
+}
+
+.yearList *{
+    color: #A52A2A;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.year {
+    cursor: pointer;
+    position: relative;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 900;
+}
+
+.dropdown-content {
+    display: none;
+    top: 100%; /* Position the dropdown below the year */
+    left: 0;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    list-style-type: none;
+    padding: 0.5rem 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 900;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
 }
