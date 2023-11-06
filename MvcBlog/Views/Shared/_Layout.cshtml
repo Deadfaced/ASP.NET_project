@@ -1,5 +1,13 @@
-﻿<!DOCTYPE html>
-@model PostViewModel
+﻿@using Microsoft.AspNetCore.Identity
+@using MvcBlog.Areas.Identity.Data
+
+@inject UserManager<MvcBlogUser> UserManager
+
+@{
+    var user = await UserManager.GetUserAsync(User);
+}
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -16,8 +24,27 @@
                 <a asp-controller="Posts" asp-action="Index">Posts</a>
                 <a asp-controller="About" asp-action="Index">About</a>
                 <a asp-controller="Home" asp-action="Index" class="big">JapanWanderer</a>
-                <a asp-area="Identity" asp-page="/Account/Register">Register</a>
-                <a asp-area="Identity" asp-page="/Account/Login">Login</a>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-controller="Admin" asp-action="Manage">Manage</a>
+                    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
+                        asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                        <button id="logout" type="submit">Logout</button>
+                    </form>
+                }
+                else if (User.IsInRole("User"))
+                {
+                    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
+                        asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                        <button type="submit">Logout</button>
+                    </form>
+                    <a>@user.FirstName</a>
+                }
+                else
+                {
+                    <a asp-area="Identity" asp-page="/Account/Register">Register</a>
+                    <a asp-area="Identity" asp-page="/Account/Login">Login</a>
+                }
             </div>
         </div>
     </header>
