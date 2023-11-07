@@ -1,0 +1,30 @@
+PostsController.cs(removed):
+public ActionResult Insert(PostModel post)
+    {
+        post.UpdatedAt = DateTime.Now;
+
+        using (
+            SqliteConnection connection = new SqliteConnection(
+                _configuration.GetConnectionString("JapanWandererContext")
+            )
+        )
+        {
+            using (var command = connection.CreateCommand())
+            {
+                connection.Open();
+                command.CommandText =
+                    $"INSERT INTO post (title, content, createdat, updatedat) VALUES ('{post.Title}', '{post.Content}', '{post.CreatedAt}', '{post.UpdatedAt}')";
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                }
+                catch (SqliteException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+        }
+
+        return RedirectToAction(nameof(Index));
+    }
