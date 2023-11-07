@@ -28,7 +28,7 @@ main .mainContent{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     overflow: auto;
 }
 
@@ -48,7 +48,7 @@ main .post{
     justify-content: space-around;
     align-items: flex-start;
     width: 100%;
-    height: 15rem;
+    height: auto;
     background-color: black;
     margin-bottom: 2rem;
     padding: 2rem;
@@ -63,14 +63,13 @@ main .post p{
     height: 60%;
     width: 100%;
     border-radius: 4px;
-    padding: 0.5rem 2rem;
+    padding: 2rem;
     font-size: large;
 }
 
 main .newPostTitle{
-    margin: 2rem 0;
-    width: 90%;
-    justify-content: left;
+    margin: 3rem 0;
+    margin-left: 5rem;
     color: #A52A2A;
     font-weight: 900;
     text-decoration: underline;
