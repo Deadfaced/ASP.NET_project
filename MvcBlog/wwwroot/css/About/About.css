@@ -13,7 +13,16 @@
     padding: 2rem;
 }
 
+.container h1{
+    margin-top: 2rem;
+    color: #A52A2A;
+}
+
 .container span{
     line-height: 2rem;
     text-align: justify;
+}
+
+.container img{
+    width: 100%;
 }
