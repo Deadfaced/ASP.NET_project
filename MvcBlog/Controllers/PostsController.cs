@@ -1,8 +1,11 @@
 using System.Diagnostics;
 using System.Globalization;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.Sqlite;
+using MvcBlog.Areas.Identity.Data;
+using MvcBlog.Data;
 using MvcBlog.Models;
 using MvcBlog.Models.ViewModels;
 
@@ -13,6 +16,10 @@ public class PostsController : Controller
     private readonly ILogger<PostsController> _logger;
 
     private readonly IConfiguration _configuration;
+
+    private readonly UserManager<MvcBlogUser> _userManager;
+
+    private readonly CommentsDbContext _context;
 
     string[] formats = {
     "dd/MM/yyyy HH:mm:ss",
@@ -36,10 +43,18 @@ public class PostsController : Controller
     "yy/MM/dd HH:mm"
 };
 
-    public PostsController(ILogger<PostsController> logger, IConfiguration configuration)
+    public PostsController(
+        ILogger<PostsController> logger,
+        IConfiguration configuration,
+        UserManager<MvcBlogUser> userManager,
+        CommentsDbContext context
+    )
     {
         _logger = logger;
         _configuration = configuration;
+        _userManager = userManager;
+        _context = context;
+
     }
 
     ////////////////////////////////   Actions   ////////////////////////////////
@@ -55,13 +70,30 @@ public class PostsController : Controller
         return View();
     }
 
-    public IActionResult ViewPost(int id)
+    public async Task<IActionResult> ViewPost(int id)
+{
+    var post = GetPostById(id);
+    var comments = _context.Comments.Where(c => c.PostId == id).ToList();
+
+    var postViewModel = new PostViewModel
     {
-        var post = GetPostById(id);
-        var postViewModel = new PostViewModel();
-        postViewModel.Post = post;
-        return View(postViewModel);
+        Post = post,
+        Comments = comments
+    };
+
+    // Create a new Comment object and set the Author property to the first name of the currently logged-in user
+    var newComment = new Comment();
+    if (User.Identity.IsAuthenticated)
+    {
+        var user = await _userManager.GetUserAsync(User);
+        newComment.Author = user.FirstName; // Assuming your ApplicationUser has a FirstName property
     }
+
+    // Add the new Comment object to your view model
+    postViewModel.NewComment = newComment;
+
+    return View(postViewModel);
+}
 
     public ActionResult EditPost(int id)
     {
@@ -208,8 +240,20 @@ public class PostsController : Controller
                         {
                             DateTime parsedCreateDate;
                             DateTime parsedUpdateDate;
-                            DateTime.TryParseExact(reader.GetString(3), formats, CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedCreateDate);
-                            DateTime.TryParseExact(reader.GetString(4), formats, CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedUpdateDate);
+                            DateTime.TryParseExact(
+                                reader.GetString(3),
+                                formats,
+                                CultureInfo.InvariantCulture,
+                                DateTimeStyles.None,
+                                out parsedCreateDate
+                            );
+                            DateTime.TryParseExact(
+                                reader.GetString(4),
+                                formats,
+                                CultureInfo.InvariantCulture,
+                                DateTimeStyles.None,
+                                out parsedUpdateDate
+                            );
 
                             post.Id = reader.GetInt32(0);
                             post.Title = reader.GetString(1);
@@ -229,7 +273,6 @@ public class PostsController : Controller
         return post;
     }
 
-
     [HttpPost]
     public JsonResult Delete(int id)
     {
@@ -248,7 +291,7 @@ public class PostsController : Controller
             }
         }
 
-        return Json(new Object{});
+        return Json(new Object { });
     }
 
     ////////////////////////////////   Methods   ////////////////////////////////

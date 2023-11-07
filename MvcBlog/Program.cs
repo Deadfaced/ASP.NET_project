@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using MvcBlog.Areas.Identity.Data;
 using MvcBlog.Data;
 
+
 public class Program
 {
     public static async Task Main(string[] args)
@@ -19,6 +20,11 @@ public class Program
 
         // Add the DbContext to the service collection
         builder.Services.AddDbContext<MvcBlogContext>(
+            options => options.UseSqlite(connectionString)
+        );
+
+        // Add the DbContext to the service collection
+        builder.Services.AddDbContext<CommentsDbContext>(
             options => options.UseSqlite(connectionString)
         );
 

@@ -34,11 +34,11 @@
                 }
                 else if (User.IsInRole("User"))
                 {
+                    <a>@user.FirstName</a>
                     <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
                         asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                         <button type="submit">Logout</button>
                     </form>
-                    <a>@user.FirstName</a>
                 }
                 else
                 {

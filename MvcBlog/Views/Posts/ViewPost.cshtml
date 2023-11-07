@@ -7,7 +7,8 @@
 
         <div class="post">
             <div class="postHeader">
-                <h2><a asp-controller="Posts" asp-action="ViewPost" asp-route-id="@Model.Post.Id">@Model.Post.Title</a></h2>
+                <h2><a asp-controller="Posts" asp-action="ViewPost" asp-route-id="@Model.Post.Id">@Model.Post.Title</a>
+                </h2>
                 <h5>@Model.Post.UpdatedAt</h5>
             </div>
             <p>@Model.Post.Content</p>
@@ -19,6 +20,26 @@
                 </ul>
             </div>
         </div>
+
+        <div class="comments">
+            @if (Model.Comments != null)
+            {
+                foreach (var comment in Model.Comments)
+                {
+                    <div class="comment">
+                        <h5>@comment.Author</h5>
+                        <p>@comment.Text</p>
+                    </div>
+                }
+            }
+        </div>
+
+        <form asp-controller="Comments" asp-action="AddComment" method="post">
+            <input type="hidden" name="postId" value="@Model.Post.Id" />
+            <input type="hidden" name="author" value="@Model.NewComment.Author" />
+            <textarea name="text" placeholder="Your comment" required></textarea>
+            <input type="submit" value="Add Comment" />
+        </form>
     </div>
 
     <div class="sidebar">

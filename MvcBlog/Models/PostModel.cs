@@ -13,5 +13,11 @@ public class PostModel
     public DateTime CreatedAt { get; set; }
 
     public DateTime UpdatedAt { get; set; }
+
+    public List<Comment> Comments { get; set; }
+
+    public PostModel()
+    {
+        Comments = new List<Comment>();
+    }
 }
-    
