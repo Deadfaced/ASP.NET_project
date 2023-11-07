@@ -3,6 +3,7 @@
 ## Bernardo
 
 frontend:
+
 `Views\Posts\Index.cshtml`
 
 `Views\Posts\ViewPost.cshtml`
@@ -10,6 +11,9 @@ frontend:
 `Views\Posts\EditPost.cshtml`
 
 `Views\Posts\_InsertForm.cshtml`
+
+`Views\Admin\Manage.cshtml` 
+
 
 
 search:
