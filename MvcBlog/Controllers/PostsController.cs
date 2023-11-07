@@ -20,9 +20,9 @@ public class PostsController : Controller
     "MM/dd/yyyy H:mm:ss",
     "dd/MM/yyyy HH:mm",
     "yyyy/MM/dd HH:mm:ss",
-    "MM/dd/yyyy h:mm:ss tt",  // 12-hour clock with AM/PM designations
-    "yyyy-MM-ddTHH:mm:ss",    // ISO 8601 format without milliseconds
-    "yyyy-MM-ddTHH:mm:ss.fff",// ISO 8601 format with milliseconds
+    "MM/dd/yyyy h:mm:ss tt",  
+    "yyyy-MM-ddTHH:mm:ss",  
+    "yyyy-MM-ddTHH:mm:ss.fff",
     "yyyy/MM/dd HH:mm",
     "dd-MM-yyyy HH:mm:ss",
     "dd-MM-yyyy H:mm:ss",
