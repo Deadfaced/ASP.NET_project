@@ -2,22 +2,20 @@
 
 ## Bernardo
 
-sidebar: new view component to be reused
-(PostController: add method to return 3 latest posts
-    $"SELECT * FROM Posts ORDERBY Posts.CreatedAt TOP 3"  <-- somehting like this
-)
+frontend:
+`Views\Posts\Index.cshtml`
 
-```html
-<main>
-    @RenderBody()
-    <sidebar />
-</main>
-```
+`Views\Posts\ViewPost.cshtml`
 
-about page
+`Views\Posts\EditPost.cshtml`
 
-navbar:
-login icon dropdown
+`Views\Posts\_InsertForm.cshtml`
+
+
+search:
+- search by year and month
+- search by keyword
+- search by city
 
 
 ## Daniel
