@@ -14,7 +14,27 @@ public class PostsController : Controller
 
     private readonly IConfiguration _configuration;
 
-    string[] formats = { "dd/MM/yyyy HH:mm:ss", "MM/dd/yyyy HH:mm:ss" , "MM/dd/yyyy H:mm:ss" };
+    string[] formats = {
+    "dd/MM/yyyy HH:mm:ss",
+    "MM/dd/yyyy HH:mm:ss",
+    "MM/dd/yyyy H:mm:ss",
+    "dd/MM/yyyy HH:mm",
+    "yyyy/MM/dd HH:mm:ss",
+    "MM/dd/yyyy h:mm:ss tt",  // 12-hour clock with AM/PM designations
+    "yyyy-MM-ddTHH:mm:ss",    // ISO 8601 format without milliseconds
+    "yyyy-MM-ddTHH:mm:ss.fff",// ISO 8601 format with milliseconds
+    "yyyy/MM/dd HH:mm",
+    "dd-MM-yyyy HH:mm:ss",
+    "dd-MM-yyyy H:mm:ss",
+    "dd-MM-yyyy HH:mm",
+    "yyyy-MM-dd HH:mm:ss",
+    "MM-dd-yyyy HH:mm:ss",
+    "MM-dd-yyyy H:mm:ss",
+    "MM-dd-yyyy HH:mm",
+    "yy/MM/dd HH:mm:ss",
+    "yy/MM/dd H:mm:ss",
+    "yy/MM/dd HH:mm"
+};
 
     public PostsController(ILogger<PostsController> logger, IConfiguration configuration)
     {
@@ -56,17 +76,15 @@ public class PostsController : Controller
         post.CreatedAt = DateTime.Now;
         post.UpdatedAt = DateTime.Now;
 
-        using (
-            SqliteConnection connection = new SqliteConnection(
-                _configuration.GetConnectionString("JapanWandererContext")
-            )
-        )
+        using (SqliteConnection connection = new SqliteConnection(_configuration.GetConnectionString("JapanWandererContext")))
         {
-            using (var command = connection.CreateCommand())
+            connection.Open();
+            using (var command = new SqliteCommand("INSERT INTO post (title, content, createdat, updatedat) VALUES (@title, @content, @createdAt, @updatedAt)", connection))
             {
-                connection.Open();
-                command.CommandText =
-                    $"INSERT INTO post (title, content, createdat, updatedat) VALUES ('{post.Title}', '{post.Content}', '{post.CreatedAt}', '{post.UpdatedAt}')";
+                command.Parameters.AddWithValue("@title", post.Title);
+                command.Parameters.AddWithValue("@content", post.Content);
+                command.Parameters.AddWithValue("@createdAt", post.CreatedAt);
+                command.Parameters.AddWithValue("@updatedAt", post.UpdatedAt);
 
                 try
                 {
@@ -84,19 +102,19 @@ public class PostsController : Controller
 
     public ActionResult Update(PostModel post)
     {
+        post.CreatedAt = DateTime.Now;
         post.UpdatedAt = DateTime.Now;
 
-        using (
-            SqliteConnection connection = new SqliteConnection(
-                _configuration.GetConnectionString("JapanWandererContext")
-            )
-        )
+        using (SqliteConnection connection = new SqliteConnection(_configuration.GetConnectionString("JapanWandererContext")))
         {
-            using (var command = connection.CreateCommand())
+            connection.Open();
+            using (var command = new SqliteCommand("UPDATE post SET title = @title, content = @content, createdat = @createdAt, updatedat = @updatedAt WHERE Id = @id", connection))
             {
-                connection.Open();
-                command.CommandText =
-                    $"UPDATE post SET title = '{post.Title}', content = '{post.Content}', updatedat = '{post.UpdatedAt}' WHERE Id = '{post.Id}'";
+                command.Parameters.AddWithValue("@title", post.Title);
+                command.Parameters.AddWithValue("@content", post.Content);
+                command.Parameters.AddWithValue("@createdAt", post.CreatedAt);
+                command.Parameters.AddWithValue("@updatedAt", post.UpdatedAt);
+                command.Parameters.AddWithValue("@id", post.Id);
 
                 try
                 {
@@ -141,6 +159,8 @@ public class PostsController : Controller
                             DateTime parsedUpdateDate;
                             DateTime.TryParseExact(reader.GetString(3), formats, CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedCreateDate);
                             DateTime.TryParseExact(reader.GetString(4), formats, CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedUpdateDate);
+
+
 
                             postList.Add(
                                 new PostModel
