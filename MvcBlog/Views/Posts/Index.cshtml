@@ -20,6 +20,9 @@
         @if(User.IsInRole("Admin")){
             <a asp-controller="Posts" asp-action="NewPost" class="newPostTitle">New Post</a>
         }
+        else {
+            <div></div> <!-- Empty div to take up space -->
+        }
         <input type="text" class="search" placeholder="Search">
         </div>
 

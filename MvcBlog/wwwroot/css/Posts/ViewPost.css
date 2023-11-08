@@ -45,7 +45,7 @@ main .post{
     justify-content: space-around;
     align-items: flex-start;
     width: 100%;
-    height: 15rem;
+    height: auto;
     background-color: black;
     margin-bottom: 2rem;
     padding: 2rem;
@@ -61,9 +61,8 @@ main .post p{
     height: 60%;
     width: 100%;
     border-radius: 4px;
-    padding: 0.5rem 2rem;
+    padding: 1rem 2rem;
     font-size: large;
-    border: 1px solid #f5c1cd;
 }
 
 main .newPostTitle{
@@ -73,4 +72,63 @@ main .newPostTitle{
     color: #f5c1cd;
     font-weight: 900;
     text-decoration: underline;
+}
+
+main form{
+    width: 100%;
+}
+
+form *{
+    margin: 0.5rem 0;
+}
+
+.submitComment{
+    background-color: #1da1f2;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    margin-top: 10px;
+}
+
+.actions{
+    margin: 1rem 0;
+}
+
+.actions *{
+    height: auto;
+    margin: 0 0.5rem;
+}
+
+.comments{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.addComment{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.commentContent {
+    border: none;
+    outline: none;
+    resize: none;
+    background-color: black;
+    color: white;
+    min-height: 1.6rem;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0.25rem;
+    border-bottom: 2px solid #a;
+    overflow-y: hidden;
 }

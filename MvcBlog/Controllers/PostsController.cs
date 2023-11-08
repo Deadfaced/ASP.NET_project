@@ -71,29 +71,29 @@ public class PostsController : Controller
     }
 
     public async Task<IActionResult> ViewPost(int id)
-{
-    var post = GetPostById(id);
-    var comments = _context.Comments.Where(c => c.PostId == id).ToList();
-
-    var postViewModel = new PostViewModel
     {
-        Post = post,
-        Comments = comments
-    };
+        var post = GetPostById(id);
+        var comments = _context.Comments.Where(c => c.PostId == id).ToList();
 
-    // Create a new Comment object and set the Author property to the first name of the currently logged-in user
-    var newComment = new Comment();
-    if (User.Identity.IsAuthenticated)
-    {
-        var user = await _userManager.GetUserAsync(User);
-        newComment.Author = user.FirstName; // Assuming your ApplicationUser has a FirstName property
+        var postViewModel = new PostViewModel
+        {
+            Post = post,
+            Comments = comments
+        };
+
+        // Create a new Comment object and set the Author property to the first name of the currently logged-in user
+        var newComment = new Comment();
+        if (User.Identity.IsAuthenticated)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            newComment.Author = user.FirstName; // Assuming your ApplicationUser has a FirstName property
+        }
+
+        // Add the new Comment object to your view model
+        postViewModel.NewComment = newComment;
+
+        return View(postViewModel);
     }
-
-    // Add the new Comment object to your view model
-    postViewModel.NewComment = newComment;
-
-    return View(postViewModel);
-}
 
     public ActionResult EditPost(int id)
     {
@@ -134,17 +134,15 @@ public class PostsController : Controller
 
     public ActionResult Update(PostModel post)
     {
-        post.CreatedAt = DateTime.Now;
         post.UpdatedAt = DateTime.Now;
 
         using (SqliteConnection connection = new SqliteConnection(_configuration.GetConnectionString("JapanWandererContext")))
         {
             connection.Open();
-            using (var command = new SqliteCommand("UPDATE post SET title = @title, content = @content, createdat = @createdAt, updatedat = @updatedAt WHERE Id = @id", connection))
+            using (var command = new SqliteCommand("UPDATE post SET title = @title, content = @content, updatedat = @updatedAt WHERE Id = @id", connection))
             {
                 command.Parameters.AddWithValue("@title", post.Title);
                 command.Parameters.AddWithValue("@content", post.Content);
-                command.Parameters.AddWithValue("@createdAt", post.CreatedAt);
                 command.Parameters.AddWithValue("@updatedAt", post.UpdatedAt);
                 command.Parameters.AddWithValue("@id", post.Id);
 
@@ -187,12 +185,11 @@ public class PostsController : Controller
                     {
                         while (reader.Read())
                         {
-                            DateTime parsedCreateDate;
-                            DateTime parsedUpdateDate;
-                            DateTime.TryParseExact(reader.GetString(3), formats, CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedCreateDate);
-                            DateTime.TryParseExact(reader.GetString(4), formats, CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedUpdateDate);
+                            DateTime parsedCreateDate = DateTime.Parse(reader.GetString(3));
+                            DateTime parsedUpdateDate = DateTime.Parse(reader.GetString(4));
 
-
+                            string formattedCreateDate = parsedCreateDate.ToString("yyyy-MM-dd HH:mm:ss");
+                            string formattedUpdateDate = parsedUpdateDate.ToString("yyyy-MM-dd HH:mm:ss");
 
                             postList.Add(
                                 new PostModel
@@ -200,8 +197,8 @@ public class PostsController : Controller
                                     Id = reader.GetInt32(0),
                                     Title = reader.GetString(1),
                                     Content = reader.GetString(2),
-                                    CreatedAt = parsedCreateDate,
-                                    UpdatedAt = parsedUpdateDate
+                                    CreatedAt = DateTime.Parse(formattedCreateDate),
+                                    UpdatedAt = DateTime.Parse(formattedUpdateDate)
                                 }
                             );
                         }
@@ -238,28 +235,17 @@ public class PostsController : Controller
                     {
                         while (reader.Read())
                         {
-                            DateTime parsedCreateDate;
-                            DateTime parsedUpdateDate;
-                            DateTime.TryParseExact(
-                                reader.GetString(3),
-                                formats,
-                                CultureInfo.InvariantCulture,
-                                DateTimeStyles.None,
-                                out parsedCreateDate
-                            );
-                            DateTime.TryParseExact(
-                                reader.GetString(4),
-                                formats,
-                                CultureInfo.InvariantCulture,
-                                DateTimeStyles.None,
-                                out parsedUpdateDate
-                            );
+                            DateTime parsedCreateDate = DateTime.Parse(reader.GetString(3));
+                            DateTime parsedUpdateDate = DateTime.Parse(reader.GetString(4));
+
+                            string formattedCreateDate = parsedCreateDate.ToString("yyyy-MM-dd HH:mm:ss");
+                            string formattedUpdateDate = parsedUpdateDate.ToString("yyyy-MM-dd HH:mm:ss");
 
                             post.Id = reader.GetInt32(0);
                             post.Title = reader.GetString(1);
                             post.Content = reader.GetString(2);
-                            post.CreatedAt = parsedCreateDate;
-                            post.UpdatedAt = parsedUpdateDate;
+                            post.CreatedAt = DateTime.Parse(formattedCreateDate);
+                            post.UpdatedAt = DateTime.Parse(formattedUpdateDate);
                         }
                     }
                     else

@@ -4,13 +4,9 @@
 
 # PRIORITY
 
-`Views\Posts\ViewPost.cshtml`
+mudar cores de azul para red
 
-- fix date
-- insert create comment inside form
-- change "edit" and "delete" buttons (to icons maybe)
-- add icons to like and dislike buttons
-- add comment section below createComment form
+
 
 
 `Views\Admin\Manage.cshtml` 
@@ -20,7 +16,6 @@
 frontend:
 
 `Views\Posts\Index.cshtml`
-
 
 `Views\Posts\EditPost.cshtml`
 
