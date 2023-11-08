@@ -67,6 +67,20 @@ main .post p{
     font-size: large;
 }
 
+main .topContent{
+    margin: 3rem 5rem;
+}
+
+main .search{
+    background-color: #181818;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 1px black thin;
+    box-shadow: none;
+    outline: none;
+}
+
 main .newPostTitle{
     margin: 3rem 0;
     margin-left: 5rem;
@@ -116,3 +130,4 @@ main .newPostTitle{
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
