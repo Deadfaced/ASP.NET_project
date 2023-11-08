@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+.page{
+    height: 70dvh;
+}
+
 .Register_BigContainer {
     width: 70vw;
     height: 65vh;

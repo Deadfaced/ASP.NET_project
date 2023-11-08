@@ -6,45 +6,49 @@
 
 <link rel="stylesheet" href="~/css/Identity/Register.css" />
 
-<div class="Register_BigContainer">
 
-    <div class="RegisterForm">
+<div class="page">
 
-        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-
-            <h1>Create a new account</h1>
-
-            <div asp-validation-summary="ModelOnly" role="alert"></div>
-
-            <div class="RegisterFormItem">
-                <label asp-for="Input.FirstName">First Name</label>
-                <input asp-for="Input.FirstName" autocomplete="off" AutoCompleteType="Disabled" aria-required="true" />
-                <span asp-validation-for="Input.FirstName"></span>
-            </div>
-            <div class="RegisterFormItem">
-                <label asp-for="Input.LastName">Last Name</label>
-                <input asp-for="Input.LastName" autocomplete="off" AutoCompleteType="Disabled" aria-required="true" />
-                <span asp-validation-for="Input.LastName"></span>
-            </div>
-            <div class="RegisterFormItem">
-                <label asp-for="Input.Email">Email</label>
-                <input asp-for="Input.Email" autocomplete="off" AutoCompleteType="Disabled" aria-required="true" />
-                <span asp-validation-for="Input.Email"></span>
-            </div>
-            <div class="RegisterFormItem">
-                <label asp-for="Input.Password">Password</label>
-                <input asp-for="Input.Password" autocomplete="off" AutoCompleteType="Disabled" aria-required="true" />
-                <span asp-validation-for="Input.Password"></span>
-            </div>
-            <div class="RegisterFormItem">
-                <label asp-for="Input.ConfirmPassword">Confirm Password</label>
-                <input asp-for="Input.ConfirmPassword" autocomplete="off" AutoCompleteType="Disabled" aria-required="true" />
-                <span asp-validation-for="Input.ConfirmPassword"></span>
-            </div>
-            <button type="submit">Register</button>
-        </form>
+    <div class="Register_BigContainer">
+    
+        <div class="RegisterForm">
+        
+            <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            
+                <h1>Create a new account</h1>
+    
+                <div asp-validation-summary="ModelOnly" role="alert"></div>
+    
+                <div class="RegisterFormItem">
+                    <label asp-for="Input.FirstName">First Name</label>
+                    <input asp-for="Input.FirstName" autocomplete="off" AutoCompleteType="Disabled" aria-required="true" />
+                    <span asp-validation-for="Input.FirstName"></span>
+                </div>
+                <div class="RegisterFormItem">
+                    <label asp-for="Input.LastName">Last Name</label>
+                    <input asp-for="Input.LastName" autocomplete="off" AutoCompleteType="Disabled" aria-required="true" />
+                    <span asp-validation-for="Input.LastName"></span>
+                </div>
+                <div class="RegisterFormItem">
+                    <label asp-for="Input.Email">Email</label>
+                    <input asp-for="Input.Email" autocomplete="off" AutoCompleteType="Disabled" aria-required="true" />
+                    <span asp-validation-for="Input.Email"></span>
+                </div>
+                <div class="RegisterFormItem">
+                    <label asp-for="Input.Password">Password</label>
+                    <input asp-for="Input.Password" autocomplete="off" AutoCompleteType="Disabled" aria-required="true" />
+                    <span asp-validation-for="Input.Password"></span>
+                </div>
+                <div class="RegisterFormItem">
+                    <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+                    <input asp-for="Input.ConfirmPassword" autocomplete="off" AutoCompleteType="Disabled" aria-required="true" />
+                    <span asp-validation-for="Input.ConfirmPassword"></span>
+                </div>
+                <button type="submit">Register</button>
+            </form>
+        </div>
+    
     </div>
-
 </div>
 
 @section Scripts {
