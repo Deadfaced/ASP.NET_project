@@ -46,7 +46,7 @@ main .post{
     align-items: flex-start;
     width: 100%;
     height: auto;
-    background-color: black;
+    background-color: #080808;
     margin-bottom: 2rem;
     padding: 2rem;
     margin-top: 2rem;
@@ -141,4 +141,16 @@ form *{
 .commentTitle{
     color: #A52A2A;
     margin-top: 1rem;
+}
+
+.lineController{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.line{
+    width: 90%;
+    border-bottom: #A52A2A 2px solid;
 }
