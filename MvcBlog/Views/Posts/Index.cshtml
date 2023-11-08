@@ -1,3 +1,9 @@
+@using Microsoft.AspNetCore.Identity
+@using MvcBlog.Areas.Identity.Data
+
+@inject SignInManager<MvcBlogUser> SignInManager
+@inject UserManager<MvcBlogUser> UserManager
+
 @{
     ViewData["Title"] = "Post";
 }
@@ -10,7 +16,13 @@
 
     <div class="mainContent">
 
-        <a asp-controller="Posts" asp-action="NewPost" class="newPostTitle">New Post</a>
+        <div class="topContent">
+        @if(User.IsInRole("Admin")){
+            <a asp-controller="Posts" asp-action="NewPost" class="newPostTitle">New Post</a>
+        }
+        <input type="text" class="search" placeholder="Search">
+        </div>
+
 
         <div class="postList">
             @foreach (var p in Model.PostList)
