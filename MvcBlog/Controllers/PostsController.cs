@@ -60,17 +60,20 @@ public class PostsController : Controller
 
     ////////////////////////////////   Actions   ////////////////////////////////
 
+////////////
     public IActionResult Index()
     {
         var postListViewModel = GetAllPosts();
         return View(postListViewModel);
     }
 
+////////////
     public IActionResult NewPost()
     {
         return View();
     }
 
+////////////
     public async Task<IActionResult> ViewPost(int id)
     {
         var post = GetPostById(id);
@@ -97,6 +100,7 @@ public class PostsController : Controller
         return View(postViewModel);
     }
 
+////////////
     public ActionResult EditPost(int id)
     {
         var post = GetPostById(id);
@@ -105,6 +109,7 @@ public class PostsController : Controller
         return View(postViewModel);
     }
 
+////////////
     public ActionResult Insert(PostModel post)
     {
         post.CreatedAt = DateTime.Now;
@@ -143,6 +148,7 @@ public class PostsController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+////////////
     public ActionResult Update(PostModel post)
     {
         post.UpdatedAt = DateTime.Now;
@@ -180,8 +186,7 @@ public class PostsController : Controller
         return RedirectToAction(nameof(Index));
     }
 
-
-
+////////////
     // This method toggles a like or dislike for a post.
     public async Task<IActionResult> ToggleLike(int postId, bool isLike)
     {
@@ -194,9 +199,16 @@ public class PostsController : Controller
         }
 
         // Find an existing like or dislike by the user for the post.
-        var userLike = await _context.UserLikes.FirstOrDefaultAsync(
-            ul => ul.UserId == user.Id && ul.PostId == postId
-        );
+        var userLikes = await _context.UserLikes
+            .Where(ul => ul.UserId == user.Id && ul.PostId == postId)
+            .ToListAsync();
+
+        UserLike? userLike = null;
+        
+        if (userLikes.Any())
+        {
+            userLike = userLikes.First();
+        }
 
         // If a like or dislike exists...
         if (userLike != null)
@@ -245,6 +257,7 @@ public class PostsController : Controller
         return RedirectToAction("ViewPost", new { id = postId });
     }
 
+////////////
     private void UpdatePost(PostModel post)
     {
         using (
@@ -263,6 +276,7 @@ public class PostsController : Controller
             }
         }
     }
+////////////
 
     ////////////////////////////////   Actions   ////////////////////////////////
 
