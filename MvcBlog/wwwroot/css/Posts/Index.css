@@ -40,6 +40,8 @@ main .postList{
     display: flex;
     flex-direction: column;
     width: 100%;
+    background-color: #080808;
+    border-radius: 8px;
 }
 
 main .post{
@@ -49,8 +51,6 @@ main .post{
     align-items: flex-start;
     width: 100%;
     height: auto;
-    background-color: black;
-    margin-bottom: 2rem;
     padding: 2rem;
     border-radius: 16px;
 }
@@ -72,6 +72,7 @@ main .topContent{
     padding: 3rem 5rem;
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
 }
 
 main .searchForm{
@@ -94,9 +95,16 @@ main .search{
 }
 
 main .newPostTitle{
-    color: #A52A2A;
-    font-weight: 900;
-    text-decoration: underline;
+    
+    background-color: #A52A2A;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    margin-top: 10px;
 }
 
 
@@ -146,3 +154,15 @@ main .newPostTitle{
     display: block;
 }
 
+
+.lineController{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.line{
+    width: 90%;
+    border-bottom: #A52A2A 2px solid;
+}

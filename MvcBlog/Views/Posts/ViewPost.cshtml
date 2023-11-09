@@ -12,62 +12,72 @@
                 </h2>
                 <h5>@Model.Post.CreatedAt</h5>
             </div>
-            <p>@Model.Post.Content</p>
+            <p class="postText">@Model.Post.Content</p>
 
             @if (User.IsInRole("Admin"))
             {
                 <div class="actions">
-                    <a asp-controller="Posts" asp-action="EditPost" asp-route-id="@Model.Post.Id"><svg
-                            xmlns="http://www.w3.org/2000/svg" height="0.75em" viewBox="0 0 512 512">
-                            <style>
-                                svg {
-                                    fill: #ffffff
-                                }
-                            </style>
-                            <path
-                                d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z" />
-                        </svg>Edit</a>
-                    <a href="#" onclick="deletePost(@Model.Post.Id); return false;"><svg xmlns="http://www.w3.org/2000/svg"
-                            height="0.75em" viewBox="0 0 448 512">
-                            <style>
-                                svg {
-                                    fill: #ffffff
-                                }
-                            </style>
-                            <path
-                                d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z" />
-                        </svg>Delete</a>
+                    <div class="editPost">
+                        <a asp-controller="Posts" asp-action="EditPost" asp-route-id="@Model.Post.Id"><svg
+                                xmlns="http://www.w3.org/2000/svg" height="0.75em" viewBox="0 0 512 512">
+                                <style>
+                                    svg {
+                                        fill: #56585d
+                                    }
+                                </style>
+                                <path
+                                    d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z" />
+                            </svg>&nbsp;&nbsp;Edit</a>
+                    </div>
+                    <div class="deletePost">
+
+                        <a href="#" onclick="deletePost(@Model.Post.Id); return false;"><svg xmlns="http://www.w3.org/2000/svg"
+                                height="0.75em" viewBox="0 0 448 512">
+                                <style>
+                                    svg {
+                                        fill: #56585d
+                                    }
+                                </style>
+                                <path
+                                    d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z" />
+                            </svg>&nbsp;&nbsp;Delete</a>
+                    </div>
                 </div>
             }
             else if (User.IsInRole("User"))
             {
                 <div class="actions">
-                    <p>@Model.Post.Likes</p>
-                    <a asp-controller="Posts" asp-action="ToggleLike" asp-route-postId="@Model.Post.Id"
-                        asp-route-isLike="true">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="0.75em" viewBox="0 0 512 512">
-                            <style>
-                                svg {
-                                    fill: #ffffff
-                                }
-                            </style>
-                            <path
-                                d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
-                        </svg>Like</a>
+                    <div class="likes">
+                        <a asp-controller="Posts" asp-action="ToggleLike" asp-route-postId="@Model.Post.Id"
+                            asp-route-isLike="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="0.75em" viewBox="0 0 512 512">
+                                <style>
+                                    svg {
+                                        fill: #ffffff
+                                    }
+                                </style>
+                                <path
+                                    d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
+                            </svg>&nbsp;&nbsp;Like</a>
+                        <p>@Model.Post.Likes</p>
 
-                    <p>@Model.Post.Dislikes</p>
-                    <a asp-controller="Posts" asp-action="ToggleLike" asp-route-postId="@Model.Post.Id"
-                        asp-route-isLike="false">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="0.75em" viewBox="0 0 512 512">
-                            <style>
-                                svg {
-                                    fill: #ffffff
-                                }
-                            </style>
-                            <path
-                                d="M119.4 44.1c23.3-3.9 46.8-1.9 68.6 5.3l49.8 77.5-75.4 75.4c-1.5 1.5-2.4 3.6-2.3 5.8s1 4.2 2.6 5.7l112 104c2.9 2.7 7.4 2.9 10.5 .3s3.8-7 1.7-10.4l-60.4-98.1 90.7-75.6c2.6-2.1 3.5-5.7 2.4-8.8L296.8 61.8c28.5-16.7 62.4-23.2 95.7-17.6C461.5 55.6 512 115.2 512 185.1v5.8c0 41.5-17.2 81.2-47.6 109.5L283.7 469.1c-7.5 7-17.4 10.9-27.7 10.9s-20.2-3.9-27.7-10.9L47.6 300.4C17.2 272.1 0 232.4 0 190.9v-5.8c0-69.9 50.5-129.5 119.4-141z" />
-                        </svg>Dislike</a>
+                    </div>
+                    <div class="dislikes">
+                        <a asp-controller="Posts" asp-action="ToggleLike" asp-route-postId="@Model.Post.Id"
+                            asp-route-isLike="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="0.75em" viewBox="0 0 512 512">
+                                <style>
+                                    svg {
+                                        fill: #ffffff
+                                    }
+                                </style>
+                                <path
+                                    d="M119.4 44.1c23.3-3.9 46.8-1.9 68.6 5.3l49.8 77.5-75.4 75.4c-1.5 1.5-2.4 3.6-2.3 5.8s1 4.2 2.6 5.7l112 104c2.9 2.7 7.4 2.9 10.5 .3s3.8-7 1.7-10.4l-60.4-98.1 90.7-75.6c2.6-2.1 3.5-5.7 2.4-8.8L296.8 61.8c28.5-16.7 62.4-23.2 95.7-17.6C461.5 55.6 512 115.2 512 185.1v5.8c0 41.5-17.2 81.2-47.6 109.5L283.7 469.1c-7.5 7-17.4 10.9-27.7 10.9s-20.2-3.9-27.7-10.9L47.6 300.4C17.2 272.1 0 232.4 0 190.9v-5.8c0-69.9 50.5-129.5 119.4-141z" />
+                            </svg>&nbsp;&nbsp;Dislike</a>
+                        <p>@Model.Post.Dislikes</p>
+                    </div>
                 </div>
+
 
                 <div class="addComment">
                     <form asp-controller="Comments" asp-action="AddComment" method="post">
@@ -79,9 +89,6 @@
                 </div>
             }
 
-            <div class="lineController">
-                <div class="line"></div>
-            </div>
             <h3 class="commentTitle">Comments</h3>
             <div class="comments">
                 @if (Model.Comments != null)
@@ -91,6 +98,10 @@
                         <div class="comment">
                             <h5>@comment.Author</h5>
                             <p>@comment.Text</p>
+                        </div>
+                        
+                        <div class="lineController">
+                            <div class="line"></div>
                         </div>
                     }
                 }

@@ -420,13 +420,16 @@ public class PostsController : Controller
 
     public IActionResult searchByKeyword(string keyword)
     {
-        var lowerCaseKeyword = keyword.ToLower();
+        IQueryable<PostModel> query = _context.Posts;
 
-        var posts = _context.Posts
-            .Where(p => p.Title.ToLower().Contains(lowerCaseKeyword))
-            .ToList();
+        if (!string.IsNullOrEmpty(keyword))
+        {
+            var lowerCaseKeyword = keyword.ToLower();
+            query = query.Where(p => p.Title.ToLower().Contains(lowerCaseKeyword));
+        }
 
-        // Assuming PostViewModel has a property List<Post> PostList
+        var posts = query.ToList();
+
         var model = new PostViewModel
         {
             PostList = posts
