@@ -1,0 +1,32 @@
+@model List<PostModel>
+
+<link rel="stylesheet" href="~/css/ViewComponents/MostLiked/style.css " asp-append-version="true" />
+
+<div class="mostLiked">
+
+    @{
+        var i = 0;
+    }
+    @foreach (var post in Model)
+    {
+        // Split the post title
+        var parts = post.Title.Split(new[] { ',', '-' }, StringSplitOptions.RemoveEmptyEntries);
+        var majorCity = parts.Length > 0 ? parts[0].Trim() : string.Empty;
+        var location = parts.Length > 1 ? parts[1].Trim() : string.Empty;
+        var attraction = parts.Length > 2 ? parts[2].Trim() : string.Empty;
+
+        <div class="post@(i+1)">
+            <a asp-controller="Posts" asp-action="ViewPost" asp-route-id="@post.Id">
+                <div class="titlePost">
+                    <h1 class="majorCity">@majorCity</h1>
+                    <h2 class="location">&emsp;@location</h2>
+                    <h3 class="attraction">&emsp;&emsp;@attraction</h3>
+                </div>
+                <div class="createdAt">@post.CreatedAt.ToString("MM/dd/yyyy")</div>
+            </a>
+        </div>
+
+        i++;
+    }
+
+</div>

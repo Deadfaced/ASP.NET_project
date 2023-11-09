@@ -21,6 +21,10 @@ main .homeImage {
 }
 
 
+main .exploreCities{
+    margin: 1rem 0;
+}
+
 main .exploreCities h1{
     color: white;
     display: flex;
@@ -36,6 +40,7 @@ main .exploreCitiesImgs{
     display: flex;
     justify-content: space-around;
     align-items: center;
+    margin: 2rem 0;
 }
 
 main .exploreCitiesImgCard {
@@ -49,9 +54,10 @@ main .exploreCitiesImgCard {
 }
 
 .exploreCitiesImgCard a{
+    height: 14rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 

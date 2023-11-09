@@ -455,7 +455,6 @@ public class PostsController : Controller
     {
         var posts = _context.Posts.Where(p => p.CreatedAt.Year == year && p.CreatedAt.Month == month).ToList();
 
-        // Assuming PostViewModel has a property List<Post> PostList
         var model = new PostViewModel
         {
             PostList = posts
@@ -463,5 +462,6 @@ public class PostsController : Controller
 
         return View("Index", model);
     }
+
 
 }

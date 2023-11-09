@@ -4,6 +4,8 @@
 @inject SignInManager<MvcBlogUser> SignInManager
 @inject UserManager<MvcBlogUser> UserManager
 
+@model PostViewModel
+
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -64,6 +66,17 @@
 
             </div>
         </div>
+
+        <h1 style="margin-top: 5rem;">Latest Posts</h1>
+        <div class="latestPosts">
+            @await Component.InvokeAsync("LatestPosts")
+        </div>
+
+        <h1 style="margin-top: 5rem;">Most Liked Posts</h1>
+        <div class="mostLiked">
+            @await Component.InvokeAsync("MostLiked")
+        </div>
     </div>
 
 </div>
+
