@@ -23,7 +23,10 @@
         else {
             <div></div> <!-- Empty div to take up space -->
         }
-        <input type="text" class="search" placeholder="Search">
+            <form asp-controller="Posts" asp-action="searchByKeyword" method="get" class="searchForm">
+                <input type="text" class="search" name="keyword" placeholder="Search">
+                <input type="submit" value="Search" style="display: none;">
+            </form>
         </div>
 
 
