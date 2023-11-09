@@ -10,26 +10,32 @@
 
 @model IEnumerable<MvcBlogUser>
 
-<h2>Manage Users</h2>
+<link rel="stylesheet" href="~/css/Admin/Manage.css " asp-append-version="true" />
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Email</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var user in Model)
-        {
+<div class="ManagePage">
+
+    <h2 class="ManageTitle">Manage Users</h2>
+
+    <table class="ManageTable">
+        <thead>
             <tr>
-                <td>@user.Email</td>
-                <td>
-                    <form method="post" asp-controller="Admin" asp-action="DeleteUser" asp-route-id="@user.Id">
-                        <input type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this user?');" />
-                    </form>
-                </td>
+                <th class="ManageTableItem">Email</th>
+                <th class="ManageTableItem">Actions</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody class="ManageUsers">
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td class="ManageTableItem">@user.Email</td>
+                    <td class="ManageTableItem">
+                        <form method="post" asp-controller="Admin" asp-action="DeleteUser" asp-route-id="@user.Id">
+                            <input type="submit" value="Delete" class="delete-button"
+                                onclick="return confirm('Are you sure you want to delete this user?');" />
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -75,13 +75,21 @@ namespace MvcBlog.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
-            [Required]
-            [DataType(DataType.Text)]
+            [Required(ErrorMessage = "First Name is required.")]
+            [StringLength(10, ErrorMessage = "First Name cannot be longer than 10 characters.")]
+            [RegularExpression(
+                @"^[a-zA-Z]+$",
+                ErrorMessage = "First Name can only contain letters."
+            )]
             [Display(Name = "First Name")]
             public string FirstName { get; set; }
 
-            [Required]
-            [DataType(DataType.Text)]
+            [Required(ErrorMessage = "Last Name is required.")]
+            [StringLength(10, ErrorMessage = "Last Name cannot be longer than 10 characters.")]
+            [RegularExpression(
+                @"^[a-zA-Z]+$",
+                ErrorMessage = "Last Name can only contain letters."
+            )]
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
 
@@ -146,7 +154,9 @@ namespace MvcBlog.Areas.Identity.Pages.Account
                     _logger.LogInformation("User created a new account with password.");
 
                     await _userManager.AddToRoleAsync(user, "User");
-                    
+
+                    // Redirect to login page after successful registration
+                    return RedirectToPage("/Account/Login", new { area = "Identity" });
                 }
                 foreach (var error in result.Errors)
                 {
