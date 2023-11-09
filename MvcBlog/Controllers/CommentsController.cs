@@ -12,9 +12,9 @@ namespace MvcBlog.Controllers;
 
 public class CommentsController : Controller
 {
-    private readonly CommentsDbContext _context;
+    private readonly BlogDbContext _context;
 
-    public CommentsController(CommentsDbContext context)
+    public CommentsController(BlogDbContext context)
     {
         _context = context;
     }

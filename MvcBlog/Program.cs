@@ -24,7 +24,7 @@ public class Program
         );
 
         // Add the DbContext to the service collection
-        builder.Services.AddDbContext<CommentsDbContext>(
+        builder.Services.AddDbContext<BlogDbContext>(
             options => options.UseSqlite(connectionString)
         );
 

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
 using MvcBlog.Areas.Identity.Data;
 using MvcBlog.Data;
 using MvcBlog.Models;
@@ -19,42 +20,42 @@ public class PostsController : Controller
 
     private readonly UserManager<MvcBlogUser> _userManager;
 
-    private readonly CommentsDbContext _context;
+    private readonly BlogDbContext _context;
 
-    string[] formats = {
-    "dd/MM/yyyy HH:mm:ss",
-    "MM/dd/yyyy HH:mm:ss",
-    "MM/dd/yyyy H:mm:ss",
-    "dd/MM/yyyy HH:mm",
-    "yyyy/MM/dd HH:mm:ss",
-    "MM/dd/yyyy h:mm:ss tt",  
-    "yyyy-MM-ddTHH:mm:ss",  
-    "yyyy-MM-ddTHH:mm:ss.fff",
-    "yyyy/MM/dd HH:mm",
-    "dd-MM-yyyy HH:mm:ss",
-    "dd-MM-yyyy H:mm:ss",
-    "dd-MM-yyyy HH:mm",
-    "yyyy-MM-dd HH:mm:ss",
-    "MM-dd-yyyy HH:mm:ss",
-    "MM-dd-yyyy H:mm:ss",
-    "MM-dd-yyyy HH:mm",
-    "yy/MM/dd HH:mm:ss",
-    "yy/MM/dd H:mm:ss",
-    "yy/MM/dd HH:mm"
-};
+    string[] formats =
+    {
+        "dd/MM/yyyy HH:mm:ss",
+        "MM/dd/yyyy HH:mm:ss",
+        "MM/dd/yyyy H:mm:ss",
+        "dd/MM/yyyy HH:mm",
+        "yyyy/MM/dd HH:mm:ss",
+        "MM/dd/yyyy h:mm:ss tt",
+        "yyyy-MM-ddTHH:mm:ss",
+        "yyyy-MM-ddTHH:mm:ss.fff",
+        "yyyy/MM/dd HH:mm",
+        "dd-MM-yyyy HH:mm:ss",
+        "dd-MM-yyyy H:mm:ss",
+        "dd-MM-yyyy HH:mm",
+        "yyyy-MM-dd HH:mm:ss",
+        "MM-dd-yyyy HH:mm:ss",
+        "MM-dd-yyyy H:mm:ss",
+        "MM-dd-yyyy HH:mm",
+        "yy/MM/dd HH:mm:ss",
+        "yy/MM/dd H:mm:ss",
+        "yy/MM/dd HH:mm"
+    };
 
     public PostsController(
         ILogger<PostsController> logger,
         IConfiguration configuration,
         UserManager<MvcBlogUser> userManager,
-        CommentsDbContext context
+        BlogDbContext context
     )
     {
         _logger = logger;
         _configuration = configuration;
         _userManager = userManager;
         _context = context;
-
     }
 
     ////////////////////////////////   Actions   ////////////////////////////////
@@ -73,13 +74,14 @@ public class PostsController : Controller
     public async Task<IActionResult> ViewPost(int id)
     {
         var post = GetPostById(id);
+        if (post == null)
+        {
+            return NotFound();
+        }
+
         var comments = _context.Comments.Where(c => c.PostId == id).ToList();
 
-        var postViewModel = new PostViewModel
-        {
-            Post = post,
-            Comments = comments
-        };
+        var postViewModel = new PostViewModel { Post = post, Comments = comments };
 
         // Create a new Comment object and set the Author property to the first name of the currently logged-in user
         var newComment = new Comment();
@@ -108,10 +110,19 @@ public class PostsController : Controller
         post.CreatedAt = DateTime.Now;
         post.UpdatedAt = DateTime.Now;
 
-        using (SqliteConnection connection = new SqliteConnection(_configuration.GetConnectionString("JapanWandererContext")))
+        using (
+            SqliteConnection connection = new SqliteConnection(
+                _configuration.GetConnectionString("JapanWandererContext")
+            )
+        )
         {
             connection.Open();
-            using (var command = new SqliteCommand("INSERT INTO post (title, content, createdat, updatedat) VALUES (@title, @content, @createdAt, @updatedAt)", connection))
+            using (
+                var command = new SqliteCommand(
+                    "INSERT INTO post (title, content, createdat, updatedat) VALUES (@title, @content, @createdAt, @updatedAt)",
+                    connection
+                )
+            )
             {
                 command.Parameters.AddWithValue("@title", post.Title);
                 command.Parameters.AddWithValue("@content", post.Content);
@@ -136,10 +147,19 @@ public class PostsController : Controller
     {
         post.UpdatedAt = DateTime.Now;
 
-        using (SqliteConnection connection = new SqliteConnection(_configuration.GetConnectionString("JapanWandererContext")))
+        using (
+            SqliteConnection connection = new SqliteConnection(
+                _configuration.GetConnectionString("JapanWandererContext")
+            )
+        )
         {
             connection.Open();
-            using (var command = new SqliteCommand("UPDATE post SET title = @title, content = @content, updatedat = @updatedAt WHERE Id = @id", connection))
+            using (
+                var command = new SqliteCommand(
+                    "UPDATE post SET title = @title, content = @content, updatedat = @updatedAt WHERE Id = @id",
+                    connection
+                )
+            )
             {
                 command.Parameters.AddWithValue("@title", post.Title);
                 command.Parameters.AddWithValue("@content", post.Content);
@@ -158,6 +178,90 @@ public class PostsController : Controller
         }
 
         return RedirectToAction(nameof(Index));
+    }
+
+
+
+    // This method toggles a like or dislike for a post.
+    public async Task<IActionResult> ToggleLike(int postId, bool isLike)
+    {
+        // Get the current user.
+        var user = await _userManager.GetUserAsync(User);
+        // If the user is not authenticated, return an Unauthorized result.
+        if (user == null)
+        {
+            return Unauthorized();
+        }
+
+        // Find an existing like or dislike by the user for the post.
+        var userLike = await _context.UserLikes.FirstOrDefaultAsync(
+            ul => ul.UserId == user.Id && ul.PostId == postId
+        );
+
+        // If a like or dislike exists...
+        if (userLike != null)
+        {
+            // If the existing like/dislike is the same as the new one, remove it.
+            // Otherwise, update it.
+            if (userLike.IsLike == isLike)
+            {
+                _context.UserLikes.Remove(userLike);
+            }
+            else
+            {
+                userLike.IsLike = isLike;
+            }
+        }
+        else
+        {
+            // If a like or dislike does not exist, create a new one.
+            userLike = new UserLike
+            {
+                UserId = user.Id,
+                PostId = postId,
+                IsLike = isLike
+            };
+            _context.UserLikes.Add(userLike);
+        }
+
+        // Save the changes to the database.
+        await _context.SaveChangesAsync();
+
+        // Find the post that the like or dislike is for.
+        var post = await _context.Posts.FindAsync(postId);
+        // Update the like count for the post.
+        post.Likes = await _context.UserLikes.CountAsync(ul => ul.PostId == postId && ul.IsLike);
+        // Update the dislike count for the post.
+        post.Dislikes = await _context.UserLikes.CountAsync(
+            ul => ul.PostId == postId && !ul.IsLike
+        );
+
+        // Update the post in the database.
+        _context.Update(post);
+        // Save the changes to the database.
+        await _context.SaveChangesAsync();
+
+        // Redirect the user to the view post page.
+        return RedirectToAction("ViewPost", new { id = postId });
+    }
+
+    private void UpdatePost(PostModel post)
+    {
+        using (
+            SqliteConnection connection = new SqliteConnection(
+                _configuration.GetConnectionString("JapanWandererContext")
+            )
+        )
+        {
+            using (var command = connection.CreateCommand())
+            {
+                connection.Open();
+                command.CommandText =
+                    $"UPDATE post SET Likes = {post.Likes}, Dislikes = {post.Dislikes} WHERE Id = {post.Id}";
+
+                command.ExecuteNonQuery();
+            }
+        }
     }
 
     ////////////////////////////////   Actions   ////////////////////////////////
@@ -188,8 +292,12 @@ public class PostsController : Controller
                             DateTime parsedCreateDate = DateTime.Parse(reader.GetString(3));
                             DateTime parsedUpdateDate = DateTime.Parse(reader.GetString(4));
 
-                            string formattedCreateDate = parsedCreateDate.ToString("yyyy-MM-dd HH:mm:ss");
-                            string formattedUpdateDate = parsedUpdateDate.ToString("yyyy-MM-dd HH:mm:ss");
+                            string formattedCreateDate = parsedCreateDate.ToString(
+                                "yyyy-MM-dd HH:mm:ss"
+                            );
+                            string formattedUpdateDate = parsedUpdateDate.ToString(
+                                "yyyy-MM-dd HH:mm:ss"
+                            );
 
                             postList.Add(
                                 new PostModel
@@ -233,19 +341,25 @@ public class PostsController : Controller
                 {
                     if (reader.HasRows)
                     {
-                        while (reader.Read())
+                        if (reader.Read())
                         {
                             DateTime parsedCreateDate = DateTime.Parse(reader.GetString(3));
                             DateTime parsedUpdateDate = DateTime.Parse(reader.GetString(4));
 
-                            string formattedCreateDate = parsedCreateDate.ToString("yyyy-MM-dd HH:mm:ss");
-                            string formattedUpdateDate = parsedUpdateDate.ToString("yyyy-MM-dd HH:mm:ss");
+                            string formattedCreateDate = parsedCreateDate.ToString(
+                                "yyyy-MM-dd HH:mm:ss"
+                            );
+                            string formattedUpdateDate = parsedUpdateDate.ToString(
+                                "yyyy-MM-dd HH:mm:ss"
+                            );
 
                             post.Id = reader.GetInt32(0);
                             post.Title = reader.GetString(1);
                             post.Content = reader.GetString(2);
                             post.CreatedAt = DateTime.Parse(formattedCreateDate);
                             post.UpdatedAt = DateTime.Parse(formattedUpdateDate);
+                            post.Likes = reader.GetInt32(5);
+                            post.Dislikes = reader.GetInt32(6);
                         }
                     }
                     else

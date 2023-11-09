@@ -1,7 +1,9 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using MvcBlog.Models.ViewModels;
 
 namespace MvcBlog.Models;
 
+[Table("Post")]
 public class PostModel
 {
     public int Id { get; set; }
@@ -20,4 +22,8 @@ public class PostModel
     {
         Comments = new List<Comment>();
     }
+
+    public int Likes { get; set; }
+    
+    public int Dislikes { get; set; }
 }
