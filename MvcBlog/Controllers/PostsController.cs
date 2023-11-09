@@ -417,4 +417,48 @@ public class PostsController : Controller
             new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier }
         );
     }
+
+    public IActionResult searchByKeyword(string keyword)
+    {
+        var lowerCaseKeyword = keyword.ToLower();
+
+        var posts = _context.Posts
+            .Where(p => p.Title.ToLower().Contains(lowerCaseKeyword))
+            .ToList();
+
+        // Assuming PostViewModel has a property List<Post> PostList
+        var model = new PostViewModel
+        {
+            PostList = posts
+        };
+
+        return View("Index", model);
+    }
+
+    public IActionResult SearchByYear(int year)
+    {
+        var posts = _context.Posts.Where(p => p.CreatedAt.Year == year).ToList();
+
+        // Assuming PostViewModel has a property List<Post> PostList
+        var model = new PostViewModel
+        {
+            PostList = posts
+        };
+
+        return View("Index", model);
+    }
+
+    public IActionResult SearchByMonth(int year, int month)
+    {
+        var posts = _context.Posts.Where(p => p.CreatedAt.Year == year && p.CreatedAt.Month == month).ToList();
+
+        // Assuming PostViewModel has a property List<Post> PostList
+        var model = new PostViewModel
+        {
+            PostList = posts
+        };
+
+        return View("Index", model);
+    }
+
 }
