@@ -4,23 +4,12 @@
 
 # PRIORITY
 
-mudar cores de azul para red
-
-
-
-
-`Views\Admin\Manage.cshtml` 
 
 
 
 frontend:
 
 `Views\Posts\Index.cshtml`
-
-`Views\Posts\EditPost.cshtml`
-
-`Views\Posts\_InsertForm.cshtml`
-
 
 
 
@@ -31,3 +20,7 @@ search:
 
 
 ## Daniel
+
+
+`Views\Admin\Manage.cshtml` 
+
