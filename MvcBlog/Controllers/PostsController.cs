@@ -423,7 +423,7 @@ public class PostsController : Controller
         var lowerCaseKeyword = keyword.ToLower();
 
         var posts = _context.Posts
-            .Where(p => p.Title.ToLower().Contains(lowerCaseKeyword) || p.Content.ToLower().Contains(lowerCaseKeyword))
+            .Where(p => p.Title.ToLower().Contains(lowerCaseKeyword))
             .ToList();
 
         // Assuming PostViewModel has a property List<Post> PostList
@@ -460,4 +460,5 @@ public class PostsController : Controller
 
         return View("Index", model);
     }
+
 }
